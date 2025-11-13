@@ -1,25 +1,33 @@
 package com.pradip.sewearn.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ApiResponse<T> {
 
     private String message;
-    private int statusCode;
     private T data;
+    private int status;
 
-    public static <T> ApiResponse<T> of(String message, int statusCode, T data) {
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timestamp;
+
+    public static <T> ApiResponse<T> success(String message, T data, int status) {
         return ApiResponse.<T>builder()
                 .message(message)
-                .statusCode(statusCode)
                 .data(data)
+                .status(status)
+                .timestamp(LocalDateTime.now())
                 .build();
+    }
+
+    public static <T> ApiResponse<T> success(String message, T data) {
+        return success(message, data, 200);
     }
 }
