@@ -1,9 +1,11 @@
 package com.pradip.sewearn.service;
 
+import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveRequest;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveResponse;
 
 import com.pradip.sewearn.dto.receive.SewEarnReceiveSummaryResponse;
+import com.pradip.sewearn.model.receive.SewEarnReceive;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -32,5 +34,7 @@ public interface SewEarnReceiveService {
     Page<SewEarnReceiveSummaryResponse> getAllReceivesSummaryPaged(Pageable pageable);
 
     Page<SewEarnReceiveSummaryResponse> getReceivesByDateSummary(LocalDate date, Pageable pageable);
+
+    SewEarnReceiveResponse markAsCompleted(Long id, MarkAsCompletedRequest req);
 
 }

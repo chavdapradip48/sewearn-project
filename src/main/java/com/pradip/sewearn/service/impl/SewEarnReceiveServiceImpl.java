@@ -1,5 +1,6 @@
 package com.pradip.sewearn.service.impl;
 
+import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.receive.*;
 import com.pradip.sewearn.exception.custom.ResourceNotFoundException;
 import com.pradip.sewearn.mapper.SewEarnReceiveMapper;
@@ -40,7 +41,7 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         SewEarnReceive entity = mapper.toEntity(request);
 
         int totalQty = 0;
-        double totalEarning = 0.0;
+//        double totalEarning = 0.0;
 
         for (ReceivedItemRequest itemReq : request.getReceivedItems()) {
 
@@ -52,11 +53,11 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
             entity.addReceivedItem(item);
 
             totalQty += item.getQuantity();
-            totalEarning += material.getPrice() * item.getQuantity();
+//            totalEarning += material.getPrice() * item.getQuantity();
         }
 
         entity.setTotalReceivedQuantity(totalQty);
-        entity.setTotalEarning(totalEarning);
+//        entity.setTotalEarning(totalEarning);
 
         return mapper.toDto(receiveRepository.save(entity));
     }
@@ -109,7 +110,7 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         existing.setReceivedDate(request.getReceivedDate());
 
         int totalQty = 0;
-        double totalEarning = 0.0;
+//        double totalEarning = 0.0;
 
         for (ReceivedItemRequest itemReq : request.getReceivedItems()) {
             RawMaterialType material = resolveMaterial(itemReq.getRawMaterialTypeId(), itemReq.getRawMaterialTypeName());
@@ -120,11 +121,11 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
             existing.addReceivedItem(item);
 
             totalQty += item.getQuantity();
-            totalEarning += material.getPrice() * item.getQuantity();
+//            totalEarning += material.getPrice() * item.getQuantity();
         }
 
         existing.setTotalReceivedQuantity(totalQty);
-        existing.setTotalEarning(totalEarning);
+//        existing.setTotalEarning(totalEarning);
 
         return mapper.toDto(receiveRepository.save(existing));
     }
@@ -169,7 +170,7 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
     // Helper: Resolve Material
     // =====================================
     private RawMaterialType resolveMaterial(Long id, String name) {
-        if (id != null) {
+        if (id != null && id != 0) {
             return materialRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Material not found with ID: " + id));
         }
@@ -180,5 +181,28 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         throw new ResourceNotFoundException("Material id or name must be provided");
     }
 
+
+    @Override
+    public SewEarnReceiveResponse markAsCompleted(Long id, MarkAsCompletedRequest req) {
+
+        SewEarnReceive receive = receiveRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Receive batch not found: " + id));
+
+        if (receive.getMarkAsCompleted()) throw new IllegalStateException("Already marked as completed");
+
+        receive.setMarkAsCompleted(true);
+
+        LocalDate completedDate = (req.getCompletedDate() != null) ? req.getCompletedDate() : LocalDate.now();
+        double totalEarnings = 0.0;
+
+        for (ReceivedItem item : receive.getReceivedItems()) {
+            Integer completedQty = item.getQuantity();  // Full completion
+            item.setTotalCompletedQuantity(completedQty);
+            item.addItemTrack(ItemTrack.builder().completedDate(completedDate).completedQuantity(completedQty)
+                    .receivedItem(item).build());
+            totalEarnings += completedQty * item.getRawMaterialType().getPrice();
+        }
+        receive.setTotalEarning(totalEarnings);
+        return mapper.toDto(receiveRepository.save(receive));
+    }
 
 }

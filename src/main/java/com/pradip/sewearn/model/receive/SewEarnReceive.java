@@ -25,6 +25,9 @@ public class SewEarnReceive {
     private Integer totalReceivedQuantity;   // Sum of all received items
     private Double totalEarning;             // Based on material price if needed
 
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean markAsCompleted = false;
+
     @OneToMany(mappedBy = "receive", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<ReceivedItem> receivedItems = new ArrayList<>();

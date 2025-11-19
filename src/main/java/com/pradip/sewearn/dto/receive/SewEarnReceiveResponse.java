@@ -17,6 +17,6 @@ public class SewEarnReceiveResponse {
 
     private Integer totalReceivedQuantity;
     private Double totalEarning;
-
+    private Boolean markAsCompleted = false;
     private List<ReceivedItemResponse> receivedItems;
 }
