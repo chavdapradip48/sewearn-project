@@ -20,6 +20,7 @@ public class SewEarnReceiveMapper {
                 .receivedDate(entity.getReceivedDate())
                 .totalReceivedQuantity(entity.getTotalReceivedQuantity())
                 .totalEarning(entity.getTotalEarning())
+                .markAsCompleted(entity.getMarkAsCompleted())
                 .receivedItems(
                         entity.getReceivedItems().stream()
                                 .map(this::toItemDto)

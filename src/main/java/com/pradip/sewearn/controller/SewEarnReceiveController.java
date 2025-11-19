@@ -2,10 +2,13 @@ package com.pradip.sewearn.controller;
 
 import com.pradip.sewearn.contstant.ApiMessages;
 import com.pradip.sewearn.dto.ApiResponse;
+import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.PagedResponse;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveRequest;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveResponse;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveSummaryResponse;
+import com.pradip.sewearn.mapper.SewEarnReceiveMapper;
+import com.pradip.sewearn.model.receive.SewEarnReceive;
 import com.pradip.sewearn.service.SewEarnReceiveService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -49,7 +52,7 @@ public class SewEarnReceiveController {
     // PAGED LIST
     @Operation(summary = "Get all receives (paged)")
     @GetMapping
-    public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveSummaryResponse>>> listAll(
+    public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveResponse>>> listAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size,
             @RequestParam(defaultValue = "receivedDate") String sort,
@@ -61,9 +64,9 @@ public class SewEarnReceiveController {
                 Sort.by(Sort.Direction.fromString(dir), sort)
         );
 
-        Page<SewEarnReceiveSummaryResponse> result = service.getAllReceivesSummaryPaged(pageable);
+        Page<SewEarnReceiveResponse> result = service.getAllReceives(pageable);
 
-        PagedResponse<SewEarnReceiveSummaryResponse> paged = PagedResponse.<SewEarnReceiveSummaryResponse>builder()
+        PagedResponse<SewEarnReceiveResponse> paged = PagedResponse.<SewEarnReceiveResponse>builder()
                 .items(result.getContent())
                 .page(result.getNumber())
                 .size(result.getSize())
@@ -122,5 +125,15 @@ public class SewEarnReceiveController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteReceive(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Mark receive batch as completed")
+    @PostMapping("/{id}/mark-as-completed")
+    public ResponseEntity<ApiResponse<SewEarnReceiveResponse>> markAsCompleted(
+            @PathVariable Long id,
+            @RequestBody(required = false) MarkAsCompletedRequest request) {
+
+        SewEarnReceiveResponse updated = service.markAsCompleted(id, request);
+        return ResponseEntity.ok(ApiResponse.success("Marked as completed", updated));
     }
 }
