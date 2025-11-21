@@ -14,7 +14,9 @@ import com.pradip.sewearn.service.SewEarnReceiveService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -144,20 +146,12 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
 
     @Override
     public List<SewEarnReceiveSummaryResponse> getAllReceivesSummary() {
-        return receiveRepository.findAll().stream()
-                .map(receive -> SewEarnReceiveSummaryResponse.builder()
-                        .id(receive.getId())
-                        .receivedDate(receive.getReceivedDate())
-                        .totalReceivedQuantity(receive.getTotalReceivedQuantity())
-                        .totalEarning(receive.getTotalEarning())
-                        .build()
-                ).toList();
+        return receiveRepository.findAll().stream().map(mapper::toSummary).toList();
     }
 
     @Override
     public Page<SewEarnReceiveSummaryResponse> getAllReceivesSummaryPaged(Pageable pageable) {
-        return receiveRepository.findAll(pageable)
-                .map(mapper::toSummary);
+        return receiveRepository.findAll(pageable).map(mapper::toSummary);
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.pradip.sewearn.dto.receive.SewEarnReceiveSummaryResponse;
 import com.pradip.sewearn.mapper.SewEarnReceiveMapper;
 import com.pradip.sewearn.model.receive.SewEarnReceive;
 import com.pradip.sewearn.service.SewEarnReceiveService;
+import com.pradip.sewearn.util.PagingUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -58,34 +59,22 @@ public class SewEarnReceiveController {
             @RequestParam(defaultValue = "receivedDate") String sort,
             @RequestParam(defaultValue = "DESC") String dir) {
 
-        Pageable pageable = PageRequest.of(
-                page,
-                size,
-                Sort.by(Sort.Direction.fromString(dir), sort)
-        );
-
-        Page<SewEarnReceiveResponse> result = service.getAllReceives(pageable);
-
-        PagedResponse<SewEarnReceiveResponse> paged = PagedResponse.<SewEarnReceiveResponse>builder()
-                .items(result.getContent())
-                .page(result.getNumber())
-                .size(result.getSize())
-                .totalElements(result.getTotalElements())
-                .totalPages(result.getTotalPages())
-                .build();
-
-        return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, paged));
+        Page<SewEarnReceiveResponse> result = service.getAllReceives(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
+        return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, PagingUtils.toPagedResponse(result)));
     }
 
-    // SUMMARY LIST (NO PAGINATION)
     @Operation(summary = "Summary list of receives")
     @GetMapping("/summary")
-    public ResponseEntity<ApiResponse<List<SewEarnReceiveSummaryResponse>>> summaryList() {
-        List<SewEarnReceiveSummaryResponse> list = service.getAllReceivesSummary();
-        return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, list));
+    public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveSummaryResponse>>> summaryList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "receivedDate") String sort,
+            @RequestParam(defaultValue = "DESC") String dir
+    ) {
+        Page<SewEarnReceiveSummaryResponse> allReceivesSummaryPaged = service.getAllReceivesSummaryPaged(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
+        return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, PagingUtils.toPagedResponse(allReceivesSummaryPaged)));
     }
 
-    // LIST BY DATE (PAGED)
     @Operation(summary = "Get receives by date (paged)")
     @GetMapping("/date/{date}")
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveSummaryResponse>>> getByDate(

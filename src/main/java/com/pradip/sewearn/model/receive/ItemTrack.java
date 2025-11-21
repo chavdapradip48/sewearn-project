@@ -23,6 +23,7 @@ public class ItemTrack {
     private Integer completedQuantity;   // daily completed number
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name = "received_item_id")
     private ReceivedItem receivedItem;
 }

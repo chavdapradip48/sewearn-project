@@ -59,6 +59,7 @@ public class SewEarnReceiveMapper {
         return SewEarnReceive.builder()
                 .receivedDate(dto.getReceivedDate())
                 .totalEarning(0.0)
+                .markAsCompleted(false)
                 .totalReceivedQuantity(0)
                 .build();
     }
