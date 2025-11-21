@@ -4,11 +4,10 @@ import com.pradip.sewearn.contstant.ApiMessages;
 import com.pradip.sewearn.dto.ApiResponse;
 import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.PagedResponse;
+import com.pradip.sewearn.dto.receive.SewEarnReceiveDto;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveRequest;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveResponse;
 import com.pradip.sewearn.dto.receive.SewEarnReceiveSummaryResponse;
-import com.pradip.sewearn.mapper.SewEarnReceiveMapper;
-import com.pradip.sewearn.model.receive.SewEarnReceive;
 import com.pradip.sewearn.service.SewEarnReceiveService;
 import com.pradip.sewearn.util.PagingUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -124,5 +123,19 @@ public class SewEarnReceiveController {
 
         SewEarnReceiveResponse updated = service.markAsCompleted(id, request);
         return ResponseEntity.ok(ApiResponse.success("Marked as completed", updated));
+    }
+
+    @Operation(summary = "Get work progress with pagination")
+    @GetMapping("/work-in-progress")
+    public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveDto>>> getProgress(
+            @RequestParam(defaultValue = "false") boolean isCompleted,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        PagedResponse<SewEarnReceiveDto> data = PagingUtils.toPagedResponse(service.getProgress(isCompleted, page, size));
+
+        return ResponseEntity.ok(
+                ApiResponse.success("Work progress fetched", data)
+        );
     }
 }

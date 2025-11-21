@@ -3,6 +3,7 @@ package com.pradip.sewearn.service.impl;
 import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.receive.*;
 import com.pradip.sewearn.exception.custom.ResourceNotFoundException;
+import com.pradip.sewearn.mapper.ReceivedItemMapper;
 import com.pradip.sewearn.mapper.SewEarnReceiveMapper;
 import com.pradip.sewearn.model.RawMaterialType;
 import com.pradip.sewearn.model.receive.*;
@@ -16,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +32,7 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
     private final ReceivedItemRepository receivedItemRepository;
     private final RawMaterialTypeRepository materialRepository;
     private final SewEarnReceiveMapper mapper;
+    private final ReceivedItemMapper receivedItemMapper;
 
 
     // =====================================
@@ -197,6 +198,14 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         }
         receive.setTotalEarning(totalEarnings);
         return mapper.toDto(receiveRepository.save(receive));
+    }
+
+    public Page<SewEarnReceiveDto> getProgress(boolean completed, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<SewEarnReceive> pageResult = receiveRepository.findAllByCompleted(completed, pageable);
+
+        return pageResult.map(receivedItemMapper::toReceiveDto);
     }
 
 }
