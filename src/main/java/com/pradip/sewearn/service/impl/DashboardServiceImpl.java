@@ -2,16 +2,15 @@ package com.pradip.sewearn.service.impl;
 
 
 import com.pradip.sewearn.dto.DashboardSummaryResponse;
-import com.pradip.sewearn.dto.MaterialEarningDTO;
+import com.pradip.sewearn.dto.MaterialQuantityDTO;
 import com.pradip.sewearn.dto.WeeklyMaterialPieResponse;
 import com.pradip.sewearn.dto.WeeklyProgressResponse;
 import com.pradip.sewearn.projection.DailyEarningProjection;
-import com.pradip.sewearn.projection.MaterialEarningProjection;
+import com.pradip.sewearn.projection.MaterialQuantityProjection;
 import com.pradip.sewearn.repository.ItemTrackRepository;
 import com.pradip.sewearn.repository.ReceivedItemRepository;
 import com.pradip.sewearn.service.DashboardService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
@@ -108,26 +107,22 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public WeeklyMaterialPieResponse getWeeklyMaterialWisePie(int weekOffset) {
 
-        // Determine the week's date range
         LocalDate today = LocalDate.now().plusWeeks(weekOffset);
+
         LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
         LocalDate endOfWeek = today.with(DayOfWeek.SUNDAY);
 
-        // Fetch grouped data
-        List<MaterialEarningProjection> rows =
-                trackRepo.getMaterialWiseEarningsBetween(startOfWeek, endOfWeek);
+        List<MaterialQuantityProjection> rows =
+                trackRepo.getMaterialWiseCompletedBetween(startOfWeek, endOfWeek);
 
-        // Convert to DTO list
-        List<MaterialEarningDTO> materials = rows.stream()
-                .map(r -> MaterialEarningDTO.builder()
+        List<MaterialQuantityDTO> materials = rows.stream()
+                .map(r -> MaterialQuantityDTO.builder()
                         .materialName(r.getMaterialName())
-                        .earning(r.getTotalEarning())
+                        .totalQuantity(Math.toIntExact(r.getTotalQuantity()))
                         .build())
                 .toList();
 
-        return WeeklyMaterialPieResponse.builder()
-                .week(weekOffset)
-                .materials(materials)
-                .build();
+        return WeeklyMaterialPieResponse.builder().week(weekOffset).materials(materials).build();
     }
+
 }

@@ -2,8 +2,7 @@ package com.pradip.sewearn.repository;
 
 import com.pradip.sewearn.model.receive.ItemTrack;
 import com.pradip.sewearn.projection.DailyEarningProjection;
-import com.pradip.sewearn.projection.MaterialEarningProjection;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.pradip.sewearn.projection.MaterialQuantityProjection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -27,7 +26,7 @@ public interface ItemTrackRepository extends CrudRepository<ItemTrack, Long> {
 
     @Query("""
         SELECT t.completedDate AS completedDate,
-               SUM(t.completedQuantity * rt.price) AS totalEarning
+               SUM(t.completedQuantity * rt.price) AS totalQuantity
         FROM ItemTrack t
         JOIN t.receivedItem ri
         JOIN ri.rawMaterialType rt
@@ -59,17 +58,14 @@ public interface ItemTrackRepository extends CrudRepository<ItemTrack, Long> {
     Integer getTodaysCompleted(LocalDate today);
 
     @Query("""
-        SELECT rt.name AS materialName,
-               SUM(t.completedQuantity * rt.price) AS totalEarning
+        SELECT ri.rawMaterialType.name AS materialName,
+               SUM(t.completedQuantity) AS totalQuantity
         FROM ItemTrack t
         JOIN t.receivedItem ri
-        JOIN ri.rawMaterialType rt
         WHERE t.completedDate BETWEEN :start AND :end
-        GROUP BY rt.name
-        ORDER BY rt.name
+        GROUP BY ri.rawMaterialType.name
     """)
-    List<MaterialEarningProjection> getMaterialWiseEarningsBetween(
-            @Param("start") LocalDate start,
-            @Param("end") LocalDate end
+    List<MaterialQuantityProjection> getMaterialWiseCompletedBetween(
+            LocalDate start, LocalDate end
     );
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class MaterialEarningDTO {
+public class MaterialQuantityDTO {
     private String materialName;
-    private Long earning;
+    private Integer totalQuantity;
 }

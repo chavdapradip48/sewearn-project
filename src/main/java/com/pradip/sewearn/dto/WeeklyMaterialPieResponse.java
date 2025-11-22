@@ -9,5 +9,5 @@ import java.util.List;
 @Builder
 public class WeeklyMaterialPieResponse {
     private int week;
-    private List<MaterialEarningDTO> materials;
+    private List<MaterialQuantityDTO> materials;
 }
