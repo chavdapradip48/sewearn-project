@@ -10,8 +10,8 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WeeklyProgressResponse {
-    private Map<String, Double> dailyEarnings;
-    private Double totalCurrentWeek;
-    private Double totalPreviousWeek;
-    private Double percentageComparedToLastWeek;
+    private Map<String, Long> dailyEarnings;
+    private Long totalCurrentWeek;
+    private Long totalPreviousWeek;
+    private Long percentageComparedToLastWeek;
 }

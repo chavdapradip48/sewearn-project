@@ -45,7 +45,7 @@ public class SubmitItemServiceImpl implements SubmitItemService {
         SubmitItem item = mapper.toEntity(request);
         item.setRawMaterialType(material);
 
-        double earning = material.getPrice() * item.getQuantity();
+        long earning = material.getPrice() * item.getQuantity();
         item.setTotalEarning(earning);
 
         parent.addSubmittedItem(item);
@@ -93,14 +93,14 @@ public class SubmitItemServiceImpl implements SubmitItemService {
         SewEarnSubmit parent = existing.getSubmit();
 
         int oldQty = existing.getQuantity();
-        double oldEarning = existing.getTotalEarning();
+        long oldEarning = existing.getTotalEarning();
 
         RawMaterialType material = resolveMaterial(request.getMaterialId(), request.getMaterialName());
 
         mapper.updateEntity(existing, request);
         existing.setRawMaterialType(material);
 
-        double newEarning = material.getPrice() * existing.getQuantity();
+        long newEarning = material.getPrice() * existing.getQuantity();
         existing.setTotalEarning(newEarning);
 
         // Update totals using delta calculations

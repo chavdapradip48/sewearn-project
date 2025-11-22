@@ -16,7 +16,7 @@ public class SewEarnReceiveDto {
 
     private Integer totalReceivedQuantity;
 
-    private Double totalEarning;
+    private Long totalEarning;
 
     private Boolean markAsCompleted;
 

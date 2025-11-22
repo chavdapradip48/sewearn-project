@@ -20,10 +20,9 @@ public class ItemTrack {
 
     private LocalDate completedDate;
 
-    private Integer completedQuantity;   // daily completed number
+    private Integer completedQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OneToMany
     @JoinColumn(name = "received_item_id")
     private ReceivedItem receivedItem;
 }

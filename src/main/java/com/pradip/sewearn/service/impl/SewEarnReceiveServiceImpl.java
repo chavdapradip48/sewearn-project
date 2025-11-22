@@ -44,7 +44,6 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         SewEarnReceive entity = mapper.toEntity(request);
 
         int totalQty = 0;
-//        double totalEarning = 0.0;
 
         for (ReceivedItemRequest itemReq : request.getReceivedItems()) {
 
@@ -113,7 +112,6 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         existing.setReceivedDate(request.getReceivedDate());
 
         int totalQty = 0;
-//        double totalEarning = 0.0;
 
         for (ReceivedItemRequest itemReq : request.getReceivedItems()) {
             RawMaterialType material = resolveMaterial(itemReq.getRawMaterialTypeId(), itemReq.getRawMaterialTypeName());
@@ -124,11 +122,9 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
             existing.addReceivedItem(item);
 
             totalQty += item.getQuantity();
-//            totalEarning += material.getPrice() * item.getQuantity();
         }
 
         existing.setTotalReceivedQuantity(totalQty);
-//        existing.setTotalEarning(totalEarning);
 
         return mapper.toDto(receiveRepository.save(existing));
     }
@@ -187,7 +183,7 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         receive.setMarkAsCompleted(true);
 
         LocalDate completedDate = (req.getCompletedDate() != null) ? req.getCompletedDate() : LocalDate.now();
-        double totalEarnings = 0.0;
+        long totalEarnings = 0L;
 
         for (ReceivedItem item : receive.getReceivedItems()) {
             Integer completedQty = item.getQuantity();  // Full completion

@@ -49,7 +49,7 @@ public class ItemTrackServiceImpl implements ItemTrackService {
         SewEarnReceive sewEarnReceive = receivedItem.getReceive();
 
         long pendingCount = receivedItemRepository.countPendingItems(sewEarnReceive.getId());
-        double todayCompletedEarnings = track.getCompletedQuantity() * receivedItem.getRawMaterialType().getPrice();
+        long todayCompletedEarnings = track.getCompletedQuantity() * receivedItem.getRawMaterialType().getPrice();
 
         if (pendingCount == 0) sewEarnReceive.setMarkAsCompleted(true);
 

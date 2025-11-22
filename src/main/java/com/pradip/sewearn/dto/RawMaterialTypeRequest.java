@@ -16,5 +16,5 @@ public class RawMaterialTypeRequest {
 
     @NotNull(message = "Price is required")
     @Min(value = 0, message = "Price must be positive")
-    private Double price;
+    private Long price;
 }

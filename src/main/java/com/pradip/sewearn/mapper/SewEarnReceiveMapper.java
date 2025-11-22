@@ -8,10 +8,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class SewEarnReceiveMapper {
-
-    // =====================================
-    // Entity → DTO
-    // =====================================
     public SewEarnReceiveResponse toDto(SewEarnReceive entity) {
         if (entity == null) return null;
 
@@ -51,14 +47,10 @@ public class SewEarnReceiveMapper {
                 .build();
     }
 
-
-    // =====================================
-    // DTO → Entity
-    // =====================================
     public SewEarnReceive toEntity(SewEarnReceiveRequest dto) {
         return SewEarnReceive.builder()
                 .receivedDate(dto.getReceivedDate())
-                .totalEarning(0.0)
+                .totalEarning(0L)
                 .markAsCompleted(false)
                 .totalReceivedQuantity(0)
                 .build();
@@ -72,9 +64,11 @@ public class SewEarnReceiveMapper {
     }
 
     public SewEarnReceiveSummaryResponse toSummary(SewEarnReceive entity) {
+        int completed = (int) entity.getReceivedItems().stream().mapToLong(ReceivedItem::getTotalCompletedQuantity).sum();
         return SewEarnReceiveSummaryResponse.builder()
                 .id(entity.getId())
                 .receivedDate(entity.getReceivedDate())
+                .completedQuantity(completed)
                 .totalReceivedQuantity(entity.getTotalReceivedQuantity())
                 .totalEarning(entity.getTotalEarning())
                 .build();

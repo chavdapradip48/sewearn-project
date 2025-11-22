@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 public class MaterialEarningDTO {
     private String materialName;
-    private Double earning;
+    private Long earning;
 }

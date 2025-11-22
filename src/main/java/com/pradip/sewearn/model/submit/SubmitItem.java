@@ -19,7 +19,7 @@ public class SubmitItem {
 
     private Integer quantity;
 
-    private Double totalEarning;  // quantity * material_price
+    private Long totalEarning;  // quantity * material_price
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "raw_material_type_id")

@@ -11,6 +11,6 @@ public class SubmitItemResponse {
     private Long id;
     private String materialName;
     private Integer quantity;
-    private Double totalEarning;
+    private Long totalEarning;
     private Long submitId;
 }

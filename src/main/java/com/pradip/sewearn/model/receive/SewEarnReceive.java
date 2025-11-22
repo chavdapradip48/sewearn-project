@@ -23,7 +23,7 @@ public class SewEarnReceive {
     private LocalDate receivedDate;
 
     private Integer totalReceivedQuantity;   // Sum of all received items
-    private Double totalEarning;             // Based on material price if needed
+    private Long totalEarning;             // Based on material price if needed
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean markAsCompleted = false;

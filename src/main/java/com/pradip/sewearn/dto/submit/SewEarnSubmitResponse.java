@@ -15,7 +15,7 @@ public class SewEarnSubmitResponse {
     private LocalDate submissionDate;
 
     private Integer totalQuantity;
-    private Double totalEarning;
+    private Long totalEarning;
 
     private List<SubmitItemResponse> submittedItems;
 }

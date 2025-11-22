@@ -44,7 +44,7 @@ public class SewEarnSubmitMapper {
         return SewEarnSubmit.builder()
                 .submissionDate(dto.getSubmissionDate())
                 .totalQuantity(0)
-                .totalEarning(0.0)
+                .totalEarning(0L)
                 .build();
     }
 

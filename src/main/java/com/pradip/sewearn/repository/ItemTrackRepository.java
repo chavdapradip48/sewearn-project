@@ -23,7 +23,7 @@ public interface ItemTrackRepository extends CrudRepository<ItemTrack, Long> {
         JOIN ri.rawMaterialType rt
         WHERE t.completedDate BETWEEN :start AND :end
     """)
-    Double getEarningsBetween(LocalDate start, LocalDate end);
+    Long getEarningsBetween(LocalDate start, LocalDate end);
 
     @Query("""
         SELECT t.completedDate AS completedDate,
@@ -48,7 +48,7 @@ public interface ItemTrackRepository extends CrudRepository<ItemTrack, Long> {
         JOIN ri.rawMaterialType rt
         WHERE t.completedDate = :today
     """)
-    Double getTodaysEarnings(LocalDate today);
+    Long getTodaysEarnings(LocalDate today);
 
     // Today completed count
     @Query("""

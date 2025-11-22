@@ -19,5 +19,5 @@ public class RawMaterialType {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private Double price;
+    private Long price;
 }

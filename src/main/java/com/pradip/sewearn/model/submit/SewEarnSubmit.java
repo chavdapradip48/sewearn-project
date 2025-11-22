@@ -22,7 +22,7 @@ public class SewEarnSubmit {
 
     private LocalDate submissionDate;
 
-    private Double totalEarning; // sum of all submitted items
+    private Long totalEarning;
 
     private Integer totalQuantity;
 

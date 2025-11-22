@@ -34,8 +34,8 @@ public class DashboardServiceImpl implements DashboardService {
         LocalDate startOfMonth = today.withDayOfMonth(1);
         LocalDate endOfMonth = today.withDayOfMonth(today.lengthOfMonth());
 
-        Double monthlyEarnings = trackRepo.getEarningsBetween(startOfMonth, endOfMonth);
-        Double todaysEarnings = trackRepo.getTodaysEarnings(today);
+        Long monthlyEarnings = trackRepo.getEarningsBetween(startOfMonth, endOfMonth);
+        Long todaysEarnings = trackRepo.getTodaysEarnings(today);
         Integer todaysCompleted = trackRepo.getTodaysCompleted(today);
         Integer pending = receivedItemRepo.getTotalPending();
 
@@ -60,12 +60,12 @@ public class DashboardServiceImpl implements DashboardService {
         LocalDate prevEnd = endOfWeek.minusWeeks(1);
 
         // 3️⃣ Prepare dynamic map for Mon→Sun with zero values
-        Map<String, Double> daily = new LinkedHashMap<>();
+        Map<String, Long> daily = new LinkedHashMap<>();
         LocalDate temp = startOfWeek;
 
         for (int i = 0; i < 7; i++) {
             String shortDay = formatDay(temp.getDayOfWeek());
-            daily.put(shortDay, 0.0);
+            daily.put(shortDay, 0L);
             temp = temp.plusDays(1);
         }
 
@@ -78,20 +78,18 @@ public class DashboardServiceImpl implements DashboardService {
             daily.put(day, row.getTotalEarning());
         }
 
-        // 5️⃣ Weekly totals
-        double totalCurrentWeek = daily.values().stream().mapToDouble(Double::doubleValue).sum();
+        long totalCurrentWeek = daily.values().stream().mapToLong(Long::longValue).sum();
 
         List<DailyEarningProjection> prevRows =
                 trackRepo.getDailyEarningsBetween(prevStart, prevEnd);
 
-        double totalPrevWeek = prevRows.stream()
-                .mapToDouble(DailyEarningProjection::getTotalEarning)
-                .sum();
+        long totalPrevWeek = prevRows.stream().mapToLong(DailyEarningProjection::getTotalEarning).sum();
 
-        // 6️⃣ % Comparison
-        double perc = 0.0;
+        long perc = 0L;
         if (totalPrevWeek > 0) {
-            perc = ((totalCurrentWeek - totalPrevWeek) / totalPrevWeek) * 100;
+            double diff = totalCurrentWeek - totalPrevWeek;
+            double percentage = (diff / totalPrevWeek) * 100;
+            perc = Math.round(percentage);
         }
 
         return WeeklyProgressResponse.builder()

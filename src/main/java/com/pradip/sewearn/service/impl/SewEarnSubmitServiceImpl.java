@@ -38,7 +38,7 @@ public class SewEarnSubmitServiceImpl implements SewEarnSubmitService {
         SewEarnSubmit submit = mapper.toEntity(request);
 
         int totalQty = 0;
-        double totalEarning = 0.0;
+        long totalEarning = 0L;
 
         for (SubmitItemRequest itemReq : request.getSubmittedItems()) {
 
@@ -102,7 +102,7 @@ public class SewEarnSubmitServiceImpl implements SewEarnSubmitService {
         existing.setSubmissionDate(request.getSubmissionDate());
 
         int totalQty = 0;
-        double totalEarning = 0.0;
+        long totalEarning = 0L;
 
         for (SubmitItemRequest itemReq : request.getSubmittedItems()) {
 

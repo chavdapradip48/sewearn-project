@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class DashboardSummaryResponse {
 
     private Integer todayCompleted;
-    private Double todayEarning;
-    private Double monthlyEarning;
+    private Long todayEarning;
+    private Long monthlyEarning;
     private Integer pending;
 }

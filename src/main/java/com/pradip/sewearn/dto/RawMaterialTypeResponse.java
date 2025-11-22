@@ -10,5 +10,5 @@ public class RawMaterialTypeResponse {
 
     private Long id;
     private String name;
-    private Double price;
+    private Long price;
 }
