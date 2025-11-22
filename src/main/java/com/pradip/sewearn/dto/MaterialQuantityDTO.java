@@ -8,4 +8,5 @@ import lombok.Data;
 public class MaterialQuantityDTO {
     private String materialName;
     private Integer totalQuantity;
+    private Double percentage;
 }

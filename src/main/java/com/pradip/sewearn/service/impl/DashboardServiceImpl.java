@@ -13,6 +13,8 @@ import com.pradip.sewearn.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
@@ -115,14 +117,21 @@ public class DashboardServiceImpl implements DashboardService {
         List<MaterialQuantityProjection> rows =
                 trackRepo.getMaterialWiseCompletedBetween(startOfWeek, endOfWeek);
 
+        long totalQtyOfWeek = rows.stream().mapToLong(MaterialQuantityProjection::getTotalQuantity).sum();
+
         List<MaterialQuantityDTO> materials = rows.stream()
-                .map(r -> MaterialQuantityDTO.builder()
-                        .materialName(r.getMaterialName())
-                        .totalQuantity(Math.toIntExact(r.getTotalQuantity()))
-                        .build())
+                .map(r -> {
+                    double upper = r.getTotalQuantity() * 100;
+                    double percentage = BigDecimal.valueOf((upper) / totalQtyOfWeek).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                    return MaterialQuantityDTO.builder()
+                            .materialName(r.getMaterialName())
+                            .totalQuantity(Math.toIntExact(r.getTotalQuantity()))
+                            .percentage(percentage)
+                            .build();
+                })
                 .toList();
 
-        return WeeklyMaterialPieResponse.builder().week(weekOffset).materials(materials).build();
+        return WeeklyMaterialPieResponse.builder().week(weekOffset).totalQuantityOfWeek((int) totalQtyOfWeek).materials(materials).build();
     }
 
 }
