@@ -26,7 +26,7 @@ public interface ItemTrackRepository extends CrudRepository<ItemTrack, Long> {
 
     @Query("""
         SELECT t.completedDate AS completedDate,
-               SUM(t.completedQuantity * rt.price) AS totalQuantity
+               SUM(t.completedQuantity * rt.price) AS totalEarning
         FROM ItemTrack t
         JOIN t.receivedItem ri
         JOIN ri.rawMaterialType rt
