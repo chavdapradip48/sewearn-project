@@ -1,5 +1,6 @@
 package com.pradip.sewearn.service;
 
+import com.pradip.sewearn.dto.submit.AwaitingSubmissionMaterialResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitRequest;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitSummaryResponse;
@@ -31,4 +32,6 @@ public interface SewEarnSubmitService {
     Page<SewEarnSubmitSummaryResponse> getAllSubmissionsSummaryPaged(Pageable pageable);
 
     Page<SewEarnSubmitSummaryResponse> getSubmissionsByDateSummary(LocalDate date, Pageable pageable);
+
+    List<AwaitingSubmissionMaterialResponse> getAwaitingForSubmission();
 }

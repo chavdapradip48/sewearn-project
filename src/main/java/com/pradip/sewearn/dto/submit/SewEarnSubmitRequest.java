@@ -17,5 +17,5 @@ public class SewEarnSubmitRequest {
     private LocalDate submissionDate;
 
     @Size(min = 1, message = "At least one submitted item is required")
-    private List<SubmitItemRequest> submittedItems;
+    private List<SubmitItemRequest> items; // renamed from submittedItems
 }

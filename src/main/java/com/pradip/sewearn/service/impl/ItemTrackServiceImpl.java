@@ -62,15 +62,13 @@ public class ItemTrackServiceImpl implements ItemTrackService {
     @Override
     public ItemTrackResponse updateItemTrack(Long id, ItemTrackRequest request) {
 
-        ItemTrack existingTrack = itemTrackRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ItemTrack not found with id: " + id));
+        ItemTrack existingTrack = itemTrackRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ItemTrack not found with id: " + id));
 
         ReceivedItem receivedItem = existingTrack.getReceivedItem();
 
         int oldQty = existingTrack.getCompletedQuantity();  // IMPORTANT
         int newQty = request.getCompletedQuantity();
 
-        // 1️⃣ VALIDATION (max quantity check)
         int totalWithoutCurrentTrack = receivedItem.getTotalCompletedQuantity() - oldQty;
 
         if (receivedItem.getQuantity() < totalWithoutCurrentTrack + newQty) {
@@ -79,11 +77,9 @@ public class ItemTrackServiceImpl implements ItemTrackService {
                     + receivedItem.getRawMaterialType().getName());
         }
 
-        // 2️⃣ UPDATE ITEMTRACK
         mapper.updateEntity(existingTrack, request);
         ItemTrack savedTrack = itemTrackRepository.save(existingTrack);
 
-        // 3️⃣ IF quantity NOT changed → do nothing else
         if (oldQty == newQty) {
             return mapper.toDto(savedTrack);
         }
@@ -144,8 +140,7 @@ public class ItemTrackServiceImpl implements ItemTrackService {
     @Override
     public void deleteItemTrack(Long id) {
 
-        ItemTrack track = itemTrackRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ItemTrack not found with id: " + id));
+        ItemTrack track = itemTrackRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ItemTrack not found with id: " + id));
 
         ReceivedItem receivedItem = track.getReceivedItem();
         SewEarnReceive parent = receivedItem.getReceive();
@@ -153,15 +148,11 @@ public class ItemTrackServiceImpl implements ItemTrackService {
         int deletedQty = track.getCompletedQuantity();
         long price = receivedItem.getRawMaterialType().getPrice();
 
-        // 1️⃣ Delete ItemTrack
         itemTrackRepository.delete(track);
 
-        receivedItem.setTotalCompletedQuantity(
-                safeInt(receivedItem.getTotalCompletedQuantity()) - deletedQty
-        );
+        receivedItem.setTotalCompletedQuantity(safeInt(receivedItem.getTotalCompletedQuantity()) - deletedQty);
         receivedItemRepository.save(receivedItem);
 
-        // 3️⃣ Update Parent (Earning + MarkAsCompleted)
         updateParentAfterDelete(parent, receivedItem, deletedQty * price);
     }
 

@@ -2,6 +2,8 @@ package com.pradip.sewearn.dto.submit;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,4 +15,5 @@ public class SubmitItemResponse {
     private Integer quantity;
     private Long totalEarning;
     private Long submitId;
+    private List<SubmitItemDetailResponse> details;
 }
