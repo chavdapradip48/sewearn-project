@@ -59,6 +59,59 @@ public class ItemTrackServiceImpl implements ItemTrackService {
         return mapper.toDto(saved);
     }
 
+    @Override
+    public ItemTrackResponse updateItemTrack(Long id, ItemTrackRequest request) {
+
+        ItemTrack existingTrack = itemTrackRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ItemTrack not found with id: " + id));
+
+        ReceivedItem receivedItem = existingTrack.getReceivedItem();
+
+        int oldQty = existingTrack.getCompletedQuantity();  // IMPORTANT
+        int newQty = request.getCompletedQuantity();
+
+        // 1️⃣ VALIDATION (max quantity check)
+        int totalWithoutCurrentTrack = receivedItem.getTotalCompletedQuantity() - oldQty;
+
+        if (receivedItem.getQuantity() < totalWithoutCurrentTrack + newQty) {
+            int remain = receivedItem.getQuantity() - totalWithoutCurrentTrack;
+            throw new BadRequestException("Only " + remain + " quantity can be completed for "
+                    + receivedItem.getRawMaterialType().getName());
+        }
+
+        // 2️⃣ UPDATE ITEMTRACK
+        mapper.updateEntity(existingTrack, request);
+        ItemTrack savedTrack = itemTrackRepository.save(existingTrack);
+
+        // 3️⃣ IF quantity NOT changed → do nothing else
+        if (oldQty == newQty) {
+            return mapper.toDto(savedTrack);
+        }
+
+        receivedItem.setTotalCompletedQuantity(totalWithoutCurrentTrack + newQty);
+        receivedItemRepository.save(receivedItem);
+
+        updateParent(receivedItem, oldQty, newQty);
+
+        return mapper.toDto(savedTrack);
+    }
+
+    private void updateParent(ReceivedItem receivedItem, int oldQty, int newQty) {
+
+        SewEarnReceive parent = receivedItem.getReceive();
+        long price = receivedItem.getRawMaterialType().getPrice();
+        long oldEarnings = oldQty * price;
+        long newEarnings = newQty * price;
+
+        parent.setTotalEarning(parent.getTotalEarning() - oldEarnings + newEarnings);
+        long pendingCount = receivedItemRepository.countPendingItems(parent.getId());
+
+        parent.setMarkAsCompleted(pendingCount == 0);
+
+        sewEarnReceiveRepository.save(parent);
+    }
+
+
     private static void validateItemTracReuqest(ItemTrackRequest request, ReceivedItem receivedItem) {
         String materialName = receivedItem.getRawMaterialType().getName();
 
@@ -89,41 +142,36 @@ public class ItemTrackServiceImpl implements ItemTrackService {
     }
 
     @Override
-    public ItemTrackResponse updateItemTrack(Long id, ItemTrackRequest request) {
-        ItemTrack existing = itemTrackRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ItemTrack not found with id: " + id));
-
-        ReceivedItem parent = existing.getReceivedItem();
-        validateItemTracReuqest(request, parent);
-        int oldQty = existing.getCompletedQuantity();
-
-        // update entity
-        mapper.updateEntity(existing, request);
-        ItemTrack saved = itemTrackRepository.save(existing);
-
-        // update parent's aggregate by delta
-        int delta = saved.getCompletedQuantity() - oldQty;
-        parent.setTotalCompletedQuantity(safeInt(parent.getTotalCompletedQuantity()) + delta);
-        receivedItemRepository.save(parent);
-
-        return mapper.toDto(saved);
-    }
-
-    @Override
     public void deleteItemTrack(Long id) {
-        ItemTrack existing = itemTrackRepository.findById(id)
+
+        ItemTrack track = itemTrackRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ItemTrack not found with id: " + id));
 
-        ReceivedItem parent = existing.getReceivedItem();
-        int qty = existing.getCompletedQuantity();
+        ReceivedItem receivedItem = track.getReceivedItem();
+        SewEarnReceive parent = receivedItem.getReceive();
 
-        itemTrackRepository.delete(existing);
+        int deletedQty = track.getCompletedQuantity();
+        long price = receivedItem.getRawMaterialType().getPrice();
 
-        if (parent != null) {
-            parent.setTotalCompletedQuantity(safeInt(parent.getTotalCompletedQuantity()) - qty);
-            receivedItemRepository.save(parent);
-        }
+        // 1️⃣ Delete ItemTrack
+        itemTrackRepository.delete(track);
+
+        receivedItem.setTotalCompletedQuantity(
+                safeInt(receivedItem.getTotalCompletedQuantity()) - deletedQty
+        );
+        receivedItemRepository.save(receivedItem);
+
+        // 3️⃣ Update Parent (Earning + MarkAsCompleted)
+        updateParentAfterDelete(parent, receivedItem, deletedQty * price);
     }
+
+    private void updateParentAfterDelete(SewEarnReceive parent, ReceivedItem receivedItem, long deletedEarnings) {
+        parent.setTotalEarning(parent.getTotalEarning() - deletedEarnings);
+        parent.setMarkAsCompleted(false);
+
+        sewEarnReceiveRepository.save(parent);
+    }
+
 
     // defensive helper
     private int safeInt(Integer v) {

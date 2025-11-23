@@ -81,8 +81,7 @@ public class DashboardServiceImpl implements DashboardService {
 
         long totalCurrentWeek = daily.values().stream().mapToLong(Long::longValue).sum();
 
-        List<DailyEarningProjection> prevRows =
-                trackRepo.getDailyEarningsBetween(prevStart, prevEnd);
+        List<DailyEarningProjection> prevRows = trackRepo.getDailyEarningsBetween(prevStart, prevEnd);
 
         long totalPrevWeek = prevRows.stream().mapToLong(DailyEarningProjection::getTotalEarning).sum();
 
