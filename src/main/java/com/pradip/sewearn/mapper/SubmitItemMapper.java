@@ -2,6 +2,7 @@ package com.pradip.sewearn.mapper;
 
 import com.pradip.sewearn.dto.submit.*;
 import com.pradip.sewearn.model.submit.SubmitItem;
+import com.pradip.sewearn.model.submit.SubmitItemDetail;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,7 +24,19 @@ public class SubmitItemMapper {
                 .materialName(entity.getRawMaterialType().getName())
                 .quantity(entity.getQuantity())
                 .totalEarning(entity.getTotalEarning())
-                .submitId(entity.getSubmit().getId())
+                .details(
+                        entity.getDetails().stream()
+                                .map(this::toDetailDto)
+                                .toList()
+                )
+                .build();
+    }
+
+    private SubmitItemDetailResponse toDetailDto(SubmitItemDetail d) {
+        return SubmitItemDetailResponse.builder()
+                .receivedItemId(d.getReceivedItem().getId())
+                .receivedDate(d.getReceivedDate())
+                .quantity(d.getQuantity())
                 .build();
     }
 }

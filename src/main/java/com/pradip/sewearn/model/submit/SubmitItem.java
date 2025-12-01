@@ -4,6 +4,9 @@ import com.pradip.sewearn.model.RawMaterialType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "submit_item")
 @Getter
@@ -28,4 +31,13 @@ public class SubmitItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "submit_id")
     private SewEarnSubmit submit;
+
+    @OneToMany(mappedBy = "submitItem", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<SubmitItemDetail> details = new ArrayList<>();
+
+    public void addDetail(SubmitItemDetail detail) {
+        details.add(detail);
+        detail.setSubmitItem(this);
+    }
 }

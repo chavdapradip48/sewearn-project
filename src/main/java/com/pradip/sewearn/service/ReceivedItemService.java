@@ -1,6 +1,7 @@
 package com.pradip.sewearn.service;
 
 import com.pradip.sewearn.dto.receive.*;
+import com.pradip.sewearn.model.receive.ReceivedItem;
 
 import java.util.List;
 

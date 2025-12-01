@@ -3,6 +3,7 @@ package com.pradip.sewearn.controller;
 import com.pradip.sewearn.contstant.ApiMessages;
 import com.pradip.sewearn.dto.ApiResponse;
 import com.pradip.sewearn.dto.PagedResponse;
+import com.pradip.sewearn.dto.submit.AwaitingSubmissionMaterialResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitRequest;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitSummaryResponse;
@@ -121,5 +122,12 @@ public class SewEarnSubmitController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteSubmission(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Get completed but not yet submitted items (grouped by material)")
+    @GetMapping("/awaiting")
+    public ResponseEntity<ApiResponse<List<AwaitingSubmissionMaterialResponse>>> awaiting() {
+        List<AwaitingSubmissionMaterialResponse> list = service.getAwaitingForSubmission();
+        return ResponseEntity.ok(ApiResponse.success("AWAITING_FOR_SUBMISSION_FETCHED", list));
     }
 }

@@ -1,7 +1,9 @@
 package com.pradip.sewearn.mapper;
 
 import com.pradip.sewearn.dto.submit.*;
-import com.pradip.sewearn.model.submit.*;
+import com.pradip.sewearn.model.submit.SewEarnSubmit;
+import com.pradip.sewearn.model.submit.SubmitItem;
+import com.pradip.sewearn.model.submit.SubmitItemDetail;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -13,15 +15,13 @@ public class SewEarnSubmitMapper {
     // Entity -> DTO
     // =======================
     public SewEarnSubmitResponse toDto(SewEarnSubmit submit) {
-
         return SewEarnSubmitResponse.builder()
                 .id(submit.getId())
                 .submissionDate(submit.getSubmissionDate())
                 .totalQuantity(submit.getTotalQuantity())
                 .totalEarning(submit.getTotalEarning())
                 .submittedItems(
-                        submit.getSubmittedItems()
-                                .stream()
+                        submit.getSubmittedItems().stream()
                                 .map(this::toItemDto)
                                 .collect(Collectors.toList())
                 )
@@ -34,6 +34,19 @@ public class SewEarnSubmitMapper {
                 .materialName(item.getRawMaterialType().getName())
                 .quantity(item.getQuantity())
                 .totalEarning(item.getTotalEarning())
+                .details(
+                        item.getDetails().stream()
+                                .map(this::toDetailDto)
+                                .collect(Collectors.toList())
+                )
+                .build();
+    }
+
+    private SubmitItemDetailResponse toDetailDto(SubmitItemDetail d) {
+        return SubmitItemDetailResponse.builder()
+                .receivedItemId(d.getReceivedItem().getId())
+                .receivedDate(d.getReceivedDate())
+                .quantity(d.getQuantity())
                 .build();
     }
 
@@ -50,7 +63,7 @@ public class SewEarnSubmitMapper {
 
     public SubmitItem toItemEntity(SubmitItemRequest dto) {
         return SubmitItem.builder()
-                .quantity(dto.getQuantity())
+                .quantity(dto.getTotalSubmitQuantity())
                 .build();
     }
 
