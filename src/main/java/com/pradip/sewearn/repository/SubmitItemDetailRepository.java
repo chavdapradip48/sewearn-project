@@ -20,20 +20,23 @@ public interface SubmitItemDetailRepository extends JpaRepository<SubmitItemDeta
     int sumSubmittedForReceivedItem(@Param("receivedItemId") Long receivedItemId);
 
     @Query("""
-        SELECT 
-            r.id AS receivedItemId,
-            rm.id AS materialId,
-            rm.name AS materialName,
-            r.quantity AS completedQuantity,
-            r.receive.receivedDate AS receivedDate,
-            COALESCE(SUM(d.quantity), 0) AS submittedQuantity
-        FROM ReceivedItem r
-        JOIN r.rawMaterialType rm
-        LEFT JOIN SubmitItemDetail d ON d.receivedItem.id = r.id
-        GROUP BY r.id, rm.id, rm.name, r.quantity, r.receive.receivedDate
-        HAVING r.quantity > COALESCE(SUM(d.quantity), 0)
-    """)
+    SELECT
+        ri.id AS receivedItemId,
+        rm.id AS materialId,
+        rm.name AS materialName,
+        ri.quantity AS receivedQuantity,
+        ri.totalCompletedQuantity AS completedQuantity,
+        COALESCE(SUM(d.quantity), 0) AS submittedQuantity,
+        rcv.receivedDate AS receivedDate
+    FROM ReceivedItem ri
+    JOIN ri.rawMaterialType rm
+    JOIN ri.receive rcv
+    LEFT JOIN SubmitItemDetail d ON d.receivedItem = ri
+    GROUP BY ri.id, rm.id, rm.name, ri.quantity, ri.totalCompletedQuantity, rcv.receivedDate
+""")
     List<AwaitingProjection> findAwaitingSummary();
+
+
 
     /**
      * Fetch submitted sums grouped by receivedItemId for the given batch ids.

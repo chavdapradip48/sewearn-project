@@ -13,6 +13,7 @@ public class AwaitingSubmissionBatchResponse {
     private Long receivedItemId;
     private LocalDate receivedDate;
 
+    private Integer receivedQuantity;
     private Integer completedQuantity;
     private Integer alreadySubmitted;
     private Integer pendingQuantity;

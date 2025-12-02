@@ -143,15 +143,27 @@ public class SewEarnSubmitServiceImpl implements SewEarnSubmitService {
     @Transactional(readOnly = true)
     public List<AwaitingSubmissionMaterialResponse> getAwaitingForSubmission() {
 
-        List<AwaitingProjection> data = submitItemDetailRepository.findAwaitingSummary();
+        List<AwaitingProjection> rows = submitItemDetailRepository.findAwaitingSummary();
 
         Map<Long, AwaitingSubmissionMaterialResponse> materialMap = new LinkedHashMap<>();
 
-        for (AwaitingProjection row : data) {
+        for (AwaitingProjection row : rows) {
 
-            int pending = row.getCompletedQuantity() - row.getSubmittedQuantity();
-            if (pending <= 0) continue;
+            int received     = row.getReceivedQuantity();
+            int completed    = row.getCompletedQuantity();
+            int submitted    = row.getSubmittedQuantity() == null ? 0 : row.getSubmittedQuantity();
 
+            // business rule 1: skip if nothing is completed
+            if (completed == 0) continue;
+
+            // business rule 2: skip if fully submitted
+            if (completed == submitted) continue;
+
+            // business rule 3: pending calculation for display
+            int pending = received - completed;
+            if (pending < 0) pending = 0;  // safety guard
+
+            // group by materialId
             materialMap.putIfAbsent(
                     row.getMaterialId(),
                     AwaitingSubmissionMaterialResponse.builder()
@@ -162,19 +174,24 @@ public class SewEarnSubmitServiceImpl implements SewEarnSubmitService {
                             .build()
             );
 
-            AwaitingSubmissionMaterialResponse matResp = materialMap.get(row.getMaterialId());
+            AwaitingSubmissionMaterialResponse materialResponse = materialMap.get(row.getMaterialId());
 
-            matResp.getBatches().add(
+            // add batch record
+            materialResponse.getBatches().add(
                     AwaitingSubmissionBatchResponse.builder()
                             .receivedItemId(row.getReceivedItemId())
                             .receivedDate(row.getReceivedDate())
-                            .completedQuantity(row.getCompletedQuantity())
-                            .alreadySubmitted(row.getSubmittedQuantity())
+                            .receivedQuantity(received)
+                            .completedQuantity(completed)
+                            .alreadySubmitted(submitted)
                             .pendingQuantity(pending)
                             .build()
             );
 
-            matResp.setTotalPendingQuantity(matResp.getTotalPendingQuantity() + pending);
+            // update total pending for this material
+            materialResponse.setTotalPendingQuantity(
+                    materialResponse.getTotalPendingQuantity() + pending
+            );
         }
 
         return new ArrayList<>(materialMap.values());

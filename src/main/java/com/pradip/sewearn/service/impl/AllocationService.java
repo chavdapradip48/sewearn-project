@@ -74,38 +74,65 @@ public class AllocationService {
 
         for (SubmitItemRequest itemReq : ctx.getRequest().getItems()) {
 
-            RawMaterialType material = materialRepository.findById(itemReq.getMaterialId())
-                    .orElseThrow();
+            // 1️⃣ GROUP BATCHES BY MATERIAL ID
+            Map<Long, List<SubmitBatchRequest>> batchesByMaterial =
+                    itemReq.getBatches().stream()
+                            .collect(Collectors.groupingBy(b ->
+                                    ctx.getReceivedMap()
+                                            .get(b.getReceivedItemId())
+                                            .getRawMaterialType()
+                                            .getId()
+                            ));
 
-            SubmitItem item = mapper.toItemEntity(itemReq);
-            item.setRawMaterialType(material);
-            item.setSubmit(ctx.getSubmit());
+            // 2️⃣ FOR EACH MATERIAL → CREATE A SEPARATE SubmitItem
+            for (Map.Entry<Long, List<SubmitBatchRequest>> entry : batchesByMaterial.entrySet()) {
 
-            for (SubmitBatchRequest b : itemReq.getBatches()) {
+                Long materialId = entry.getKey();
+                List<SubmitBatchRequest> groupedBatches = entry.getValue();
 
-                ReceivedItem r = ctx.getReceivedMap().get(b.getReceivedItemId());
-                int alreadySubmitted = ctx.getAlreadySubmittedMap().getOrDefault(b.getReceivedItemId(), 0);
+                RawMaterialType material = ctx.getReceivedMap()
+                        .get(groupedBatches.get(0).getReceivedItemId())
+                        .getRawMaterialType();
 
-                SubmitItemDetail detail = SubmitItemDetail.builder()
-                        .receivedItem(r)
-                        .quantity(b.getQuantity())
-                        .receivedDate(r.getReceive().getReceivedDate())
-                        .submitItem(item)
-                        .build();
+                SubmitItem item = mapper.toItemEntity(itemReq);
+                item.setRawMaterialType(material);
+                item.setSubmit(ctx.getSubmit());
 
-                item.addDetail(detail);
+                int itemTotalQty = 0;
 
-                ctx.getAlreadySubmittedMap()
-                        .put(b.getReceivedItemId(), alreadySubmitted + b.getQuantity());
+                // 3️⃣ ADD ALL BATCH DETAILS FOR THIS MATERIAL
+                for (SubmitBatchRequest b : groupedBatches) {
+
+                    ReceivedItem r = ctx.getReceivedMap().get(b.getReceivedItemId());
+                    int alreadySubmitted = ctx.getAlreadySubmittedMap().getOrDefault(b.getReceivedItemId(), 0);
+
+                    SubmitItemDetail detail = SubmitItemDetail.builder()
+                            .receivedItem(r)
+                            .receivedDate(r.getReceive().getReceivedDate())
+                            .quantity(b.getQuantity())
+                            .submitItem(item)
+                            .build();
+
+                    item.addDetail(detail);
+
+                    itemTotalQty += b.getQuantity();
+
+                    ctx.getAlreadySubmittedMap()
+                            .put(b.getReceivedItemId(), alreadySubmitted + b.getQuantity());
+                }
+
+                // update submit item totals
+                item.setQuantity(itemTotalQty);
+
+                totalQty += itemTotalQty;
+                totalEarning += (long) itemTotalQty * material.getPrice();
+
+                ctx.getSubmit().addSubmittedItem(item);
             }
-
-            totalQty += item.getQuantity();
-            totalEarning += (long) item.getQuantity() * material.getPrice();
-
-            ctx.getSubmit().addSubmittedItem(item);
         }
 
         ctx.getSubmit().setTotalQuantity(totalQty);
         ctx.getSubmit().setTotalEarning(totalEarning);
     }
+
 }
