@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -89,53 +90,68 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
 
         SewEarnReceive existing = receiveRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Receive not found with id: " + id));
+
         existing.setReceivedDate(request.getReceivedDate());
 
-        // Map of existing ReceivedItems for quick lookup
+        // Step 1: Build map of existing items
         Map<Long, ReceivedItem> existingMap = existing.getReceivedItems().stream()
                 .collect(Collectors.toMap(ReceivedItem::getId, ri -> ri));
 
-        List<ReceivedItem> finalList = new ArrayList<>();
+        long totalCompletedCount = existing.getReceivedItems().stream().mapToLong(ReceivedItem::getTotalCompletedQuantity).sum();
+
+        List<ReceivedItem> newItems = new ArrayList<>();
         int totalQty = 0;
-        Long totalEarnings = 0L;
+
+        long totalEarnings = 0L;
 
         for (SWReceivedItemUpdateRequest itemReq : request.getReceivedItems()) {
 
-            RawMaterialType material = materialTypeService.getMaterialByIdOrName(itemReq.getMaterialId(), "");
-            ReceivedItem updatedItem;
+            RawMaterialType material =
+                    materialTypeService.getMaterialByIdOrName(null, itemReq.getMaterialName());
 
-            // CASE 1: UPDATE existing ReceivedItem — do NOT delete ItemTracks
+            ReceivedItem item;
+
+            // ---- CASE 1: Update existing item ----
             if (itemReq.getId() != null && existingMap.containsKey(itemReq.getId())) {
-                updatedItem = existingMap.get(itemReq.getId());
-                updatedItem.setQuantity(itemReq.getQuantity());
-                updatedItem.setRawMaterialType(material);
-                existingMap.remove(itemReq.getId());
-            } else {
 
-                // CASE 2: NEW ReceivedItem — create fresh
-                updatedItem = mapper.toReceivedItemEntity(itemReq);
-                updatedItem.setRawMaterialType(material);
-                updatedItem.setReceive(existing);
+                item = existingMap.get(itemReq.getId());
+                item.setQuantity(itemReq.getQuantity());
+                item.setRawMaterialType(material);
+
+                // mark as processed
+                existingMap.remove(itemReq.getId());
+            }
+            // ---- CASE 2: New item ----
+            else {
+                item = mapper.toReceivedItemEntity(itemReq);
+                item.setRawMaterialType(material);
+                item.setReceive(existing);  // important: set parent
+                existing.addReceivedItem(item); // in-place add
             }
 
-            finalList.add(updatedItem);
-            totalQty += updatedItem.getQuantity();
-            totalEarnings += (updatedItem.getRawMaterialType().getPrice() * updatedItem.getTotalCompletedQuantity());
+            newItems.add(item);
+
+            totalQty += item.getQuantity();
+            totalEarnings += (item.getRawMaterialType().getPrice() * item.getTotalCompletedQuantity());
         }
 
-        // CASE 3: DELETE those items that are NOT present in request
+        // ---- CASE 3: Remove deleted items ----
         for (ReceivedItem toRemove : existingMap.values()) {
             existing.removeReceivedItem(toRemove);
         }
 
-        existing.setReceivedItems(finalList);
+        existing.setMarkAsCompleted(Objects.equals(totalCompletedCount, totalQty));
+
+        existing.getReceivedItems().clear();
+        existing.getReceivedItems().addAll(newItems);
+
         existing.setTotalReceivedQuantity(totalQty);
         existing.setTotalEarning(totalEarnings);
 
         SewEarnReceive saved = receiveRepository.save(existing);
-
         return mapper.toDto(saved);
     }
+
 
     @Override
     public void deleteReceive(Long id) {
