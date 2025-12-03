@@ -36,4 +36,9 @@ public class SewEarnReceive {
         receivedItems.add(item);
         item.setReceive(this);
     }
+
+    public void removeReceivedItem(ReceivedItem item) {
+        receivedItems.remove(item);
+        item.setReceive(null);
+    }
 }

@@ -1,11 +1,8 @@
 package com.pradip.sewearn.service;
 
 import com.pradip.sewearn.dto.MarkAsCompletedRequest;
-import com.pradip.sewearn.dto.receive.SewEarnReceiveDto;
-import com.pradip.sewearn.dto.receive.SewEarnReceiveRequest;
-import com.pradip.sewearn.dto.receive.SewEarnReceiveResponse;
+import com.pradip.sewearn.dto.receive.*;
 
-import com.pradip.sewearn.dto.receive.SewEarnReceiveSummaryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,7 +21,7 @@ public interface SewEarnReceiveService {
 
     Page<SewEarnReceiveResponse> getReceivesByDateRange(LocalDate start, LocalDate end, Pageable pageable);
 
-    SewEarnReceiveResponse updateReceive(Long id, SewEarnReceiveRequest request);
+    SewEarnReceiveResponse updateReceive(Long id, SewEarnReceiveUpdateRequest request);
 
     void deleteReceive(Long id);
 

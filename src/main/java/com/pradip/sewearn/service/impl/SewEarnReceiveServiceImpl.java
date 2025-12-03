@@ -6,14 +6,14 @@ import com.pradip.sewearn.exception.custom.ResourceNotFoundException;
 import com.pradip.sewearn.mapper.ReceivedItemMapper;
 import com.pradip.sewearn.mapper.SewEarnReceiveMapper;
 import com.pradip.sewearn.model.RawMaterialType;
-import com.pradip.sewearn.model.receive.*;
+import com.pradip.sewearn.model.receive.ItemTrack;
+import com.pradip.sewearn.model.receive.ReceivedItem;
+import com.pradip.sewearn.model.receive.SewEarnReceive;
 import com.pradip.sewearn.repository.RawMaterialTypeRepository;
-import com.pradip.sewearn.repository.ReceivedItemRepository;
 import com.pradip.sewearn.repository.SewEarnReceiveRepository;
-
+import com.pradip.sewearn.service.RawMaterialTypeService;
 import com.pradip.sewearn.service.SewEarnReceiveService;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,45 +32,27 @@ import java.util.List;
 public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
 
     private final SewEarnReceiveRepository receiveRepository;
-    private final ReceivedItemRepository receivedItemRepository;
-    private final RawMaterialTypeRepository materialRepository;
+    private final RawMaterialTypeService materialTypeService;
     private final SewEarnReceiveMapper mapper;
     private final ReceivedItemMapper receivedItemMapper;
 
-
-    // =====================================
-    // CREATE
-    // =====================================
     @Override
     public SewEarnReceiveResponse createReceive(SewEarnReceiveRequest request) {
-
         SewEarnReceive entity = mapper.toEntity(request);
-
         int totalQty = 0;
 
         for (ReceivedItemRequest itemReq : request.getReceivedItems()) {
-
-            RawMaterialType material = resolveMaterial(itemReq.getRawMaterialTypeId(), itemReq.getRawMaterialTypeName());
-
+            RawMaterialType material = materialTypeService.getMaterialByIdOrName(itemReq.getRawMaterialTypeId(), itemReq.getRawMaterialTypeName());
             ReceivedItem item = mapper.toReceivedItemEntity(itemReq);
             item.setRawMaterialType(material);
-
             entity.addReceivedItem(item);
-
             totalQty += item.getQuantity();
-//            totalEarning += material.getPrice() * item.getQuantity();
         }
 
         entity.setTotalReceivedQuantity(totalQty);
-//        entity.setTotalEarning(totalEarning);
-
         return mapper.toDto(receiveRepository.save(entity));
     }
 
-
-    // =====================================
-    // READ
-    // =====================================
     @Override
     @Transactional(readOnly = true)
     public SewEarnReceiveResponse getReceiveById(Long id) {
@@ -98,41 +83,60 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
                 .map(mapper::toDto);
     }
 
-
-    // =====================================
-    // UPDATE
-    // =====================================
     @Override
-    public SewEarnReceiveResponse updateReceive(Long id, SewEarnReceiveRequest request) {
+    @Transactional
+    public SewEarnReceiveResponse updateReceive(Long id, SewEarnReceiveUpdateRequest request) {
 
         SewEarnReceive existing = receiveRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Receive not found with id: " + id));
-
-        existing.getReceivedItems().clear();
         existing.setReceivedDate(request.getReceivedDate());
 
+        // Map of existing ReceivedItems for quick lookup
+        Map<Long, ReceivedItem> existingMap = existing.getReceivedItems().stream()
+                .collect(Collectors.toMap(ReceivedItem::getId, ri -> ri));
+
+        List<ReceivedItem> finalList = new ArrayList<>();
         int totalQty = 0;
+        Long totalEarnings = 0L;
 
-        for (ReceivedItemRequest itemReq : request.getReceivedItems()) {
-            RawMaterialType material = resolveMaterial(itemReq.getRawMaterialTypeId(), itemReq.getRawMaterialTypeName());
+        for (SWReceivedItemUpdateRequest itemReq : request.getReceivedItems()) {
 
-            ReceivedItem item = mapper.toReceivedItemEntity(itemReq);
-            item.setRawMaterialType(material);
+            RawMaterialType material = materialTypeService.getMaterialByIdOrName(itemReq.getMaterialId(), "");
+            ReceivedItem updatedItem;
 
-            existing.addReceivedItem(item);
+            // CASE 1: UPDATE existing ReceivedItem — do NOT delete ItemTracks
+            if (itemReq.getId() != null && existingMap.containsKey(itemReq.getId())) {
+                updatedItem = existingMap.get(itemReq.getId());
+                updatedItem.setQuantity(itemReq.getQuantity());
+                updatedItem.setRawMaterialType(material);
+                existingMap.remove(itemReq.getId());
+            } else {
 
-            totalQty += item.getQuantity();
+                // CASE 2: NEW ReceivedItem — create fresh
+                updatedItem = mapper.toReceivedItemEntity(itemReq);
+                updatedItem.setRawMaterialType(material);
+                updatedItem.setReceive(existing);
+            }
+
+            finalList.add(updatedItem);
+            totalQty += updatedItem.getQuantity();
+            totalEarnings += (updatedItem.getRawMaterialType().getPrice() * updatedItem.getTotalCompletedQuantity());
         }
 
-        existing.setTotalReceivedQuantity(totalQty);
+        // CASE 3: DELETE those items that are NOT present in request
+        for (ReceivedItem toRemove : existingMap.values()) {
+            existing.removeReceivedItem(toRemove);
+        }
 
-        return mapper.toDto(receiveRepository.save(existing));
+        existing.setReceivedItems(finalList);
+        existing.setTotalReceivedQuantity(totalQty);
+        existing.setTotalEarning(totalEarnings);
+
+        SewEarnReceive saved = receiveRepository.save(existing);
+
+        return mapper.toDto(saved);
     }
 
-
-    // =====================================
-    // DELETE
-    // =====================================
     @Override
     public void deleteReceive(Long id) {
         SewEarnReceive existing = receiveRepository.findById(id)
@@ -156,22 +160,6 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
         return receiveRepository.findByReceivedDate(date, pageable)
                 .map(mapper::toSummary);
     }
-
-    // =====================================
-    // Helper: Resolve Material
-    // =====================================
-    private RawMaterialType resolveMaterial(Long id, String name) {
-        if (id != null && id != 0) {
-            return materialRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Material not found with ID: " + id));
-        }
-        if (name != null && !name.isBlank()) {
-            return materialRepository.findByNameIgnoreCase(name)
-                    .orElseThrow(() -> new ResourceNotFoundException("Material not found with name: " + name));
-        }
-        throw new ResourceNotFoundException("Material id or name must be provided");
-    }
-
 
     @Override
     public SewEarnReceiveResponse markAsCompleted(Long id, MarkAsCompletedRequest req) {

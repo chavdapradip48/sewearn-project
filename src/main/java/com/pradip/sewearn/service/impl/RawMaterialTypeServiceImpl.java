@@ -37,19 +37,21 @@ public class RawMaterialTypeServiceImpl implements RawMaterialTypeService {
     @Override
     @Transactional(readOnly = true)
     public RawMaterialTypeResponse getMaterialById(Long id) {
-        RawMaterialType entity = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Material not found with id: " + id));
+        return mapper.toDto(getMaterialEnById(id));
+    }
 
-        return mapper.toDto(entity);
+    public RawMaterialType getMaterialEnById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Material not found with id: " + id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public RawMaterialTypeResponse getMaterialByName(String name) {
-        RawMaterialType entity = repository.findByNameIgnoreCase(name)
-                .orElseThrow(() -> new ResourceNotFoundException("Material not found with name: " + name));
+        return mapper.toDto(getMaterialEnByName(name));
+    }
 
-        return mapper.toDto(entity);
+    public RawMaterialType getMaterialEnByName(String name) {
+        return repository.findByNameIgnoreCase(name).orElseThrow(() -> new ResourceNotFoundException("Material not found with name: " + name));
     }
 
     @Override
@@ -83,5 +85,13 @@ public class RawMaterialTypeServiceImpl implements RawMaterialTypeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Material not found with id: " + id));
 
         repository.delete(existing);
+    }
+
+    @Override
+    public RawMaterialType getMaterialByIdOrName(Long id, String name) {
+        if (id != null && id != 0) return getMaterialEnById(id);
+        if (name != null && !name.isBlank()) return getMaterialEnByName(name);
+
+        throw new ResourceNotFoundException("Material id or name must be provided");
     }
 }

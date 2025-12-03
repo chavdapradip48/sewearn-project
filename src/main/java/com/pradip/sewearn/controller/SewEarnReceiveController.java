@@ -4,10 +4,7 @@ import com.pradip.sewearn.contstant.ApiMessages;
 import com.pradip.sewearn.dto.ApiResponse;
 import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.PagedResponse;
-import com.pradip.sewearn.dto.receive.SewEarnReceiveDto;
-import com.pradip.sewearn.dto.receive.SewEarnReceiveRequest;
-import com.pradip.sewearn.dto.receive.SewEarnReceiveResponse;
-import com.pradip.sewearn.dto.receive.SewEarnReceiveSummaryResponse;
+import com.pradip.sewearn.dto.receive.*;
 import com.pradip.sewearn.service.SewEarnReceiveService;
 import com.pradip.sewearn.util.PagingUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -96,12 +93,11 @@ public class SewEarnReceiveController {
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, paged));
     }
 
-    // UPDATE
     @Operation(summary = "Update receive batch")
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<SewEarnReceiveResponse>> update(
             @PathVariable Long id,
-            @Valid @RequestBody SewEarnReceiveRequest request) {
+            @Valid @RequestBody SewEarnReceiveUpdateRequest request) {
 
         SewEarnReceiveResponse dto = service.updateReceive(id, request);
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_UPDATED, dto));

@@ -63,6 +63,13 @@ public class SewEarnReceiveMapper {
                 .build();
     }
 
+    public ReceivedItem toReceivedItemEntity(SWReceivedItemUpdateRequest dto) {
+        return ReceivedItem.builder()
+                .quantity(dto.getQuantity())
+                .totalCompletedQuantity(0)
+                .build();
+    }
+
     public SewEarnReceiveSummaryResponse toSummary(SewEarnReceive entity) {
         int completed = (int) entity.getReceivedItems().stream().mapToLong(ReceivedItem::getTotalCompletedQuantity).sum();
         return SewEarnReceiveSummaryResponse.builder()

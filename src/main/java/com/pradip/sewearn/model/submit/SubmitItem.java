@@ -36,8 +36,6 @@ public class SubmitItem {
     @Builder.Default
     private List<SubmitItemDetail> details = new ArrayList<>();
 
-    public void addDetail(SubmitItemDetail detail) {
-        details.add(detail);
-        detail.setSubmitItem(this);
-    }
+    public void addDetail(SubmitItemDetail detail) {details.add(detail); detail.setSubmitItem(this); }
+    public void removeDetail(SubmitItemDetail d) { details.remove(d); d.setSubmitItem(null); }
 }

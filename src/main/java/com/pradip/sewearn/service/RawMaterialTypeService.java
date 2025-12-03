@@ -2,6 +2,7 @@ package com.pradip.sewearn.service;
 
 import com.pradip.sewearn.dto.RawMaterialTypeRequest;
 import com.pradip.sewearn.dto.RawMaterialTypeResponse;
+import com.pradip.sewearn.model.RawMaterialType;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface RawMaterialTypeService {
     RawMaterialTypeResponse updateMaterial(Long id, RawMaterialTypeRequest request);
 
     void deleteMaterial(Long id);
+
+    RawMaterialType getMaterialByIdOrName(Long id, String name);
 }

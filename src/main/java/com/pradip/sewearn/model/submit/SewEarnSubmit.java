@@ -34,4 +34,9 @@ public class SewEarnSubmit {
         submittedItems.add(item);
         item.setSubmit(this);
     }
+    public void removeSubmittedItem(SubmitItem item) {
+        submittedItems.remove(item);
+        item.setSubmit(this);
+    }
+
 }
