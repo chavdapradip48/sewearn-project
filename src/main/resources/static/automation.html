@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>SewEarn Automation Tool</title>
+    <style>
+        body {
+            background: #111;
+            color: #eee;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6ab04c;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 10px;
+            font-size: 14px;
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            background: #0984e3;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: #74b9ff;
+        }
+
+        #exportBtn {
+            background: #6ab04c;
+        }
+
+        #exportBtn:hover {
+            background: #badc58;
+            color: #000;
+        }
+
+        #log {
+            margin-top: 20px;
+            background: #000;
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+            border-radius: 5px;
+            border: 1px solid #333;
+            font-family: "Consolas", monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        .success { color: #55efc4; }
+        .error { color: #ff7675; }
+        .info { color: #81ecec; }
+    </style>
+</head>
+<body>
+
+<h1>SewEarn Automation Runner</h1>
+
+<h3>Paste JSON Here:</h3>
+<textarea id="jsonInput">{ "receives": [] }</textarea>
+
+<button onclick="startAutomation()">EXECUTE</button>
+<button id="exportBtn" onclick="exportLogs()">EXPORT LOGS</button>
+
+<div id="log"></div>
+
+<script>
+    const BASE_URL = "/sewearn/api";
+
+    // -----------------------------------------------------
+    // PRINT LOGS TO THE PAGE
+    // -----------------------------------------------------
+    function logMessage(msg, type = "info") {
+        const logBox = document.getElementById("log");
+        const line = document.createElement("div");
+        line.className = type;
+        line.innerText = msg;
+        logBox.appendChild(line);
+        logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    // -----------------------------------------------------
+    // EXPORT LOGS AS TEXT
+    // -----------------------------------------------------
+    function exportLogs() {
+        const text = document.getElementById("log").innerText;
+
+        if (!text.trim()) {
+            alert("No logs to export!");
+            return;
+        }
+
+        const blob = new Blob([text], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "sewearn-automation-log.txt";
+        link.click();
+
+        URL.revokeObjectURL(url);
+    }
+
+    // -----------------------------------------------------
+    // FETCH HELPER
+    // -----------------------------------------------------
+    async function postJSON(url, body) {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+
+        if (!res.ok) {
+            const error = await res.text();
+            logMessage("❌ API Error: " + error, "error");
+            throw new Error(error);
+        }
+
+        return res.json();
+    }
+
+    // -----------------------------------------------------
+    // MAIN PROCESS FUNCTION
+    // -----------------------------------------------------
+    async function startAutomation() {
+        document.getElementById("log").innerHTML = "";
+        logMessage("🚀 Starting Automation...", "info");
+
+        let jsonData;
+        try {
+            jsonData = JSON.parse(document.getElementById("jsonInput").value);
+        } catch (e) {
+            return logMessage("❌ Invalid JSON format!", "error");
+        }
+
+        const receivesData = jsonData.receives;
+
+        for (const rec of receivesData) {
+            logMessage("===========================================", "info");
+            logMessage("📌 Processing: " + rec.receivedDate, "info");
+            logMessage("===========================================", "info");
+
+            try {
+                // --------------------------------------
+                // 1️⃣ CREATE RECEIVE
+                // --------------------------------------
+                const createResp = await postJSON(BASE_URL + "/receives", rec);
+                const receiveId = createResp.data.id;
+                const receivedItems = createResp.data.receivedItems;
+                logMessage("✔ Receive Created: " + receiveId, "success");
+
+                // --------------------------------------
+                // 2️⃣ MARK AS COMPLETED
+                // --------------------------------------
+                const fixedDate = rec.receivedDate;
+                await postJSON(`${BASE_URL}/receives/${receiveId}/mark-as-completed`, {
+                    completedDate: fixedDate
+                });
+                logMessage("✔ Marked as Completed: " + fixedDate, "success");
+
+                // --------------------------------------
+                // 3️⃣ CREATE SUBMISSION
+                // --------------------------------------
+                const batches = receivedItems.map(item => ({
+                    receivedItemId: item.id,
+                    quantity: item.quantity
+                }));
+
+                const submissionBody = {
+                    submissionDate: fixedDate,
+                    items: [{ batches }]
+                };
+
+                const submission = await postJSON(`${BASE_URL}/submissions`, submissionBody);
+                logMessage("✔ Submission Created: " + submission.data.id, "success");
+
+            } catch (err) {
+                // --------------------------------------
+                // ERROR HANDLING — CONTINUE NEXT
+                // --------------------------------------
+                logMessage("❌ ERROR for date: " + rec.receivedDate, "error");
+
+                if (err.message.includes("{")) {
+                    try {
+                        logMessage(JSON.stringify(JSON.parse(err.message), null, 2), "error");
+                    } catch {
+                        logMessage(err.message, "error");
+                    }
+                } else {
+                    logMessage(err.message, "error");
+                }
+
+                logMessage("⚠ Skipped date due to error. Continuing...", "info");
+                continue; // <-- IMPORTANT: DO NOT STOP, MOVE TO NEXT
+            }
+        }
+
+        logMessage("🔥 ALL DONE! (Processed all records)", "success");
+    }
+</script>
+
+</body>
+</html>
