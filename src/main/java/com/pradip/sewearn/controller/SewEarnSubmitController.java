@@ -1,6 +1,7 @@
 package com.pradip.sewearn.controller;
 
 import com.pradip.sewearn.contstant.ApiMessages;
+import com.pradip.sewearn.contstant.RestDefaultConstant;
 import com.pradip.sewearn.dto.ApiResponse;
 import com.pradip.sewearn.dto.PagedResponse;
 import com.pradip.sewearn.dto.submit.AwaitingSubmissionMaterialResponse;
@@ -50,10 +51,11 @@ public class SewEarnSubmitController {
     @Operation(summary = "Get all submissions (paged)")
     @GetMapping
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmitSummaryResponse>>> listAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(defaultValue = "submissionDate") String sort,
-            @RequestParam(defaultValue = "DESC") String dir) {
+        @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+        @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
+        @RequestParam(defaultValue = RestDefaultConstant.SORT_SUBMIT_DATE_DEFAULT) String sort,
+        @RequestParam(defaultValue = RestDefaultConstant.DIRECTION_DEFAULT) String dir
+    ) {
 
         Pageable pageable = PageRequest.of(
                 page,
@@ -91,10 +93,10 @@ public class SewEarnSubmitController {
     @GetMapping("/date/{date}")
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmitSummaryResponse>>> getByDate(
             @PathVariable String date,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("submissionDate").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by(RestDefaultConstant.PAGINATION_SIZE_DEFAULT).descending());
         Page<SewEarnSubmitSummaryResponse> result =
                 service.getSubmissionsByDateSummary(LocalDate.parse(date), pageable);
 

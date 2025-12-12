@@ -1,6 +1,7 @@
 package com.pradip.sewearn.controller;
 
 import com.pradip.sewearn.contstant.ApiMessages;
+import com.pradip.sewearn.contstant.RestDefaultConstant;
 import com.pradip.sewearn.dto.ApiResponse;
 import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.PagedResponse;
@@ -50,10 +51,10 @@ public class SewEarnReceiveController {
     @Operation(summary = "Get all receives (paged)")
     @GetMapping
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveResponse>>> listAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(defaultValue = "receivedDate") String sort,
-            @RequestParam(defaultValue = "DESC") String dir) {
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
+            @RequestParam(defaultValue = RestDefaultConstant.SORT_RECEIVED_DATE_DEFAULT) String sort,
+            @RequestParam(defaultValue = RestDefaultConstant.DIRECTION_DEFAULT) String dir) {
 
         Page<SewEarnReceiveResponse> result = service.getAllReceives(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, PagingUtils.toPagedResponse(result)));
@@ -62,10 +63,10 @@ public class SewEarnReceiveController {
     @Operation(summary = "Summary list of receives")
     @GetMapping("/summary")
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveSummaryResponse>>> summaryList(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(defaultValue = "receivedDate") String sort,
-            @RequestParam(defaultValue = "DESC") String dir
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
+            @RequestParam(defaultValue = RestDefaultConstant.SORT_RECEIVED_DATE_DEFAULT) String sort,
+            @RequestParam(defaultValue = RestDefaultConstant.DIRECTION_DEFAULT) String dir
     ) {
         Page<SewEarnReceiveSummaryResponse> allReceivesSummaryPaged = service.getAllReceivesSummaryPaged(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, PagingUtils.toPagedResponse(allReceivesSummaryPaged)));
@@ -75,10 +76,10 @@ public class SewEarnReceiveController {
     @GetMapping("/date/{date}")
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveSummaryResponse>>> getByDate(
             @PathVariable String date,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size) {
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("receivedDate").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by(RestDefaultConstant.SORT_RECEIVED_DATE_DEFAULT).descending());
         Page<SewEarnReceiveSummaryResponse> result =
                 service.getReceivesByDateSummary(LocalDate.parse(date), pageable);
 
@@ -125,8 +126,8 @@ public class SewEarnReceiveController {
     @GetMapping("/work-in-progress")
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveDto>>> getProgress(
             @RequestParam(defaultValue = "false") boolean isCompleted,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size
     ) {
         PagedResponse<SewEarnReceiveDto> data = PagingUtils.toPagedResponse(service.getProgress(isCompleted, page, size));
 
