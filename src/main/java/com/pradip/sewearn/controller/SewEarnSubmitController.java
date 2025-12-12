@@ -80,10 +80,10 @@ public class SewEarnSubmitController {
     @Operation(summary = "Summary list of submissions (paginated)")
     @GetMapping("/summary")
     public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmitSummaryResponse>>> summaryList(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(defaultValue = "submittedDate") String sort,
-            @RequestParam(defaultValue = "DESC") String dir) {
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
+            @RequestParam(defaultValue = RestDefaultConstant.SORT_SUBMIT_DATE_DEFAULT) String sort,
+            @RequestParam(defaultValue = RestDefaultConstant.DIRECTION_DEFAULT) String dir) {
         Page<SewEarnSubmitSummaryResponse> pagedSummary = service.getAllSubmissionsSummaryPaged(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
 
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, PagingUtils.toPagedResponse(pagedSummary)));
