@@ -74,12 +74,16 @@ public class SewEarnSubmitController {
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, paged));
     }
 
-    // SUMMARY LIST (NO PAGINATION)
-    @Operation(summary = "Summary list of submissions")
+    @Operation(summary = "Summary list of submissions (paginated)")
     @GetMapping("/summary")
-    public ResponseEntity<ApiResponse<List<SewEarnSubmitSummaryResponse>>> summaryList() {
-        List<SewEarnSubmitSummaryResponse> list = service.getAllSubmissionsSummary();
-        return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, list));
+    public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmitSummaryResponse>>> summaryList(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "submittedDate") String sort,
+            @RequestParam(defaultValue = "DESC") String dir) {
+        Page<SewEarnSubmitSummaryResponse> pagedSummary = service.getAllSubmissionsSummaryPaged(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
+
+        return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, PagingUtils.toPagedResponse(pagedSummary)));
     }
 
     // GET BY DATE (PAGED)
