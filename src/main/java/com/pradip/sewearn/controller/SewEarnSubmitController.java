@@ -77,24 +77,24 @@ public class SewEarnSubmitController {
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, paged));
     }
 
-//    @Operation(summary = "Summary list of submissions (paginated)")
-//    @GetMapping("/summary")
-//    public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmitSummaryResponse>>> summaryList(
-//            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
-//            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
-//            @RequestParam(defaultValue = RestDefaultConstant.SORT_SUBMIT_DATE_DEFAULT) String sort,
-//            @RequestParam(defaultValue = RestDefaultConstant.DIRECTION_DEFAULT) String dir) {
-//        Page<SewEarnSubmitSummaryResponse> pagedSummary = service.getAllSubmissionsSummaryPaged(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
-//
-//        return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, PagingUtils.toPagedResponse(pagedSummary)));
-//    }
-
-    @Operation(summary = "Summary list of submissions")
+    @Operation(summary = "Summary list of submissions (paginated)")
     @GetMapping("/summary")
-    public ResponseEntity<ApiResponse<List<SewEarnSubmitSummaryResponse>>> summaryList() {
-        List<SewEarnSubmitSummaryResponse> list = service.getAllSubmissionsSummary();
-        return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, list));
+    public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmitSummaryResponse>>> summaryList(
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
+            @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
+            @RequestParam(defaultValue = RestDefaultConstant.SORT_SUBMIT_DATE_DEFAULT) String sort,
+            @RequestParam(defaultValue = RestDefaultConstant.DIRECTION_DEFAULT) String dir) {
+        Page<SewEarnSubmitSummaryResponse> pagedSummary = service.getAllSubmissionsSummaryPaged(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
+
+        return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, PagingUtils.toPagedResponse(pagedSummary)));
     }
+
+//    @Operation(summary = "Summary list of submissions")
+//    @GetMapping("/summary")
+//    public ResponseEntity<ApiResponse<List<SewEarnSubmitSummaryResponse>>> summaryList() {
+//        List<SewEarnSubmitSummaryResponse> list = service.getAllSubmissionsSummary();
+//        return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, list));
+//    }
 
     // GET BY DATE (PAGED)
     @Operation(summary = "Get submissions by date (paged)")
