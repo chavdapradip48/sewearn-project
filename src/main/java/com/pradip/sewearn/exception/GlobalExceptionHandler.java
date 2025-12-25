@@ -1,9 +1,7 @@
 package com.pradip.sewearn.exception;
 
 import com.pradip.sewearn.dto.ApiResponse;
-import com.pradip.sewearn.exception.custom.BadRequestException;
-import com.pradip.sewearn.exception.custom.DuplicateResourceException;
-import com.pradip.sewearn.exception.custom.ResourceNotFoundException;
+import com.pradip.sewearn.exception.custom.*;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -107,6 +105,26 @@ public class GlobalExceptionHandler {
                         .build()
         );
     }
+
+
+    /* =========================
+       400 – BUSINESS VALIDATION
+       ========================= */
+
+    @ExceptionHandler({
+            BusinessValidationException.class,
+            SettlementOverlapException.class,
+            InvalidPaymentOperationException.class
+    })
+    public ResponseEntity<ApiResponse<Map<String, String>>> handleBusinessValidation(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( ApiResponse.<Map<String, String>>builder()
+                .message(ex.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .timestamp(LocalDateTime.now())
+                .build()
+        );
+    }
+
 
     // ============================================================
     // 6. Fallback (500 - Internal Server Error)

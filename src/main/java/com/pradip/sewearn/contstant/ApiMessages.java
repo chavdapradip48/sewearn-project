@@ -45,4 +45,34 @@ public final class ApiMessages {
     public static final String SUBMIT_ITEM_LIST_FETCHED = "Submit items retrieved successfully";
     public static final String SUBMIT_ITEM_UPDATED = "Submit item updated successfully";
     public static final String SUBMIT_ITEM_DELETED = "Submit item deleted successfully";
+
+
+    /* =====================================================
+       SETTLEMENT
+       ===================================================== */
+
+    public static final String SETTLEMENT_CALCULATED = "Settlement calculated successfully";
+    public static final String SETTLEMENT_CREATED = "Settlement created successfully";
+    public static final String SETTLEMENT_UPDATED = "Settlement updated successfully";
+    public static final String SETTLEMENT_FETCHED = "Settlement fetched successfully";
+    public static final String SETTLEMENT_LIST_FETCHED = "Settlement list fetched successfully";
+
+    /* =====================================================
+       SETTLEMENT ADJUSTMENTS
+       ===================================================== */
+
+    public static final String SETTLEMENT_ADJUSTMENT_CREATED = "Settlement adjustment created successfully";
+    public static final String SETTLEMENT_ADJUSTMENT_UPDATED = "Settlement adjustment updated successfully";
+    public static final String SETTLEMENT_ADJUSTMENT_DELETED = "Settlement adjustment deleted successfully";
+    public static final String SETTLEMENT_ADJUSTMENT_LIST_FETCHED = "Settlement adjustments fetched successfully";
+
+    /* =====================================================
+       RECEIVED PAYMENTS
+       ===================================================== */
+
+    public static final String RECEIVED_PAYMENT_CREATED = "Received payment added successfully";
+    public static final String RECEIVED_PAYMENT_UPDATED = "Received payment updated successfully";
+    public static final String RECEIVED_PAYMENT_DELETED = "Received payment deleted successfully";
+    public static final String RECEIVED_PAYMENT_FETCHED = "Received payment fetched successfully";
+    public static final String RECEIVED_PAYMENT_LIST_FETCHED = "Received payments fetched successfully";
 }

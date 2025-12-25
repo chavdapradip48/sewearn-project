@@ -1,4 +1,4 @@
-package com.pradip.sewearn.repository;
+package com.pradip.sewearn.repository.submit;
 
 import com.pradip.sewearn.model.submit.SubmitItemDetail;
 import com.pradip.sewearn.projection.AwaitingProjection;

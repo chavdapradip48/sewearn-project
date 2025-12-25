@@ -11,8 +11,8 @@ import com.pradip.sewearn.model.submit.SubmitItem;
 import com.pradip.sewearn.model.submit.SubmitItemDetail;
 import com.pradip.sewearn.projection.SubmittedSummaryProjection;
 import com.pradip.sewearn.repository.RawMaterialTypeRepository;
-import com.pradip.sewearn.repository.ReceivedItemRepository;
-import com.pradip.sewearn.repository.SubmitItemDetailRepository;
+import com.pradip.sewearn.repository.receive.ReceivedItemRepository;
+import com.pradip.sewearn.repository.submit.SubmitItemDetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

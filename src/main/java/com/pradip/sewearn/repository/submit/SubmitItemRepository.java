@@ -1,4 +1,4 @@
-package com.pradip.sewearn.repository;
+package com.pradip.sewearn.repository.submit;
 
 import com.pradip.sewearn.model.submit.SubmitItem;
 import org.springframework.data.jpa.repository.JpaRepository;

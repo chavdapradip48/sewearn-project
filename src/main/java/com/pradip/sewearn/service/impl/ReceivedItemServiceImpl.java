@@ -10,8 +10,8 @@ import com.pradip.sewearn.model.RawMaterialType;
 import com.pradip.sewearn.model.receive.ReceivedItem;
 import com.pradip.sewearn.model.receive.SewEarnReceive;
 import com.pradip.sewearn.repository.RawMaterialTypeRepository;
-import com.pradip.sewearn.repository.ReceivedItemRepository;
-import com.pradip.sewearn.repository.SewEarnReceiveRepository;
+import com.pradip.sewearn.repository.receive.ReceivedItemRepository;
+import com.pradip.sewearn.repository.receive.SewEarnReceiveRepository;
 import com.pradip.sewearn.service.ReceivedItemService;
 import lombok.RequiredArgsConstructor;
 

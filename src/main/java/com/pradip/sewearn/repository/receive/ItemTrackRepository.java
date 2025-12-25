@@ -1,4 +1,4 @@
-package com.pradip.sewearn.repository;
+package com.pradip.sewearn.repository.receive;
 
 import com.pradip.sewearn.model.receive.ItemTrack;
 import com.pradip.sewearn.projection.DailyEarningProjection;
