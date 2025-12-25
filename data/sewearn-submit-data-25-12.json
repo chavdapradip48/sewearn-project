@@ -1,0 +1,1072 @@
+{
+  "message": "Submissions retrieved successfully",
+  "data": {
+    "items": [
+      {
+        "id": 31,
+        "submissionDate": "2025-12-17",
+        "totalQuantity": 28,
+        "totalEarning": 630,
+        "submittedItems": [
+          {
+            "id": 59,
+            "materialName": "Shirt",
+            "quantity": 14,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 57,
+                "receivedDate": "2025-12-12",
+                "quantity": 7
+              },
+              {
+                "receivedItemId": 62,
+                "receivedDate": "2025-12-15",
+                "quantity": 7
+              }
+            ]
+          },
+          {
+            "id": 60,
+            "materialName": "Kurti",
+            "quantity": 14,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 61,
+                "receivedDate": "2025-12-15",
+                "quantity": 7
+              },
+              {
+                "receivedItemId": 56,
+                "receivedDate": "2025-12-12",
+                "quantity": 7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 28,
+        "submissionDate": "2025-12-15",
+        "totalQuantity": 24,
+        "totalEarning": 470,
+        "submittedItems": [
+          {
+            "id": 55,
+            "materialName": "Kurti",
+            "quantity": 23,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 56,
+                "receivedDate": "2025-12-12",
+                "quantity": 23
+              }
+            ]
+          },
+          {
+            "id": 56,
+            "materialName": "Pent",
+            "quantity": 1,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 60,
+                "receivedDate": "2025-12-12",
+                "quantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "submissionDate": "2025-12-12",
+        "totalQuantity": 56,
+        "totalEarning": 1120,
+        "submittedItems": [
+          {
+            "id": 54,
+            "materialName": "Kurti",
+            "quantity": 56,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 55,
+                "receivedDate": "2025-12-07",
+                "quantity": 46
+              },
+              {
+                "receivedItemId": 51,
+                "receivedDate": "2025-12-03",
+                "quantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "submissionDate": "2025-12-07",
+        "totalQuantity": 30,
+        "totalEarning": 495,
+        "submittedItems": [
+          {
+            "id": 50,
+            "materialName": "Kurti",
+            "quantity": 6,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 51,
+                "receivedDate": "2025-12-03",
+                "quantity": 6
+              }
+            ]
+          },
+          {
+            "id": 51,
+            "materialName": "Pent",
+            "quantity": 11,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 52,
+                "receivedDate": "2025-12-03",
+                "quantity": 11
+              }
+            ]
+          },
+          {
+            "id": 52,
+            "materialName": "Shirt",
+            "quantity": 7,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 53,
+                "receivedDate": "2025-12-03",
+                "quantity": 7
+              }
+            ]
+          },
+          {
+            "id": 53,
+            "materialName": "Nana Shirt",
+            "quantity": 6,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 54,
+                "receivedDate": "2025-12-03",
+                "quantity": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "submissionDate": "2025-12-03",
+        "totalQuantity": 10,
+        "totalEarning": 250,
+        "submittedItems": [
+          {
+            "id": 49,
+            "materialName": "Shirt",
+            "quantity": 10,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 49,
+                "receivedDate": "2025-12-03",
+                "quantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "submissionDate": "2025-11-27",
+        "totalQuantity": 40,
+        "totalEarning": 1000,
+        "submittedItems": [
+          {
+            "id": 48,
+            "materialName": "Shirt",
+            "quantity": 40,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 48,
+                "receivedDate": "2025-11-27",
+                "quantity": 40
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "submissionDate": "2025-11-24",
+        "totalQuantity": 11,
+        "totalEarning": 220,
+        "submittedItems": [
+          {
+            "id": 47,
+            "materialName": "Kurti",
+            "quantity": 11,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 47,
+                "receivedDate": "2025-11-24",
+                "quantity": 11
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "submissionDate": "2025-11-16",
+        "totalQuantity": 26,
+        "totalEarning": 355,
+        "submittedItems": [
+          {
+            "id": 44,
+            "materialName": "Kurti",
+            "quantity": 8,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 44,
+                "receivedDate": "2025-11-16",
+                "quantity": 8
+              }
+            ]
+          },
+          {
+            "id": 45,
+            "materialName": "Pent",
+            "quantity": 17,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 45,
+                "receivedDate": "2025-11-16",
+                "quantity": 17
+              }
+            ]
+          },
+          {
+            "id": 46,
+            "materialName": "Shirt",
+            "quantity": 1,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 46,
+                "receivedDate": "2025-11-16",
+                "quantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "submissionDate": "2025-11-15",
+        "totalQuantity": 15,
+        "totalEarning": 200,
+        "submittedItems": [
+          {
+            "id": 42,
+            "materialName": "Kurti",
+            "quantity": 5,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 42,
+                "receivedDate": "2025-11-15",
+                "quantity": 5
+              }
+            ]
+          },
+          {
+            "id": 43,
+            "materialName": "Pent",
+            "quantity": 10,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 43,
+                "receivedDate": "2025-11-15",
+                "quantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "submissionDate": "2025-11-14",
+        "totalQuantity": 50,
+        "totalEarning": 825,
+        "submittedItems": [
+          {
+            "id": 39,
+            "materialName": "Kurti",
+            "quantity": 25,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 39,
+                "receivedDate": "2025-11-14",
+                "quantity": 25
+              }
+            ]
+          },
+          {
+            "id": 40,
+            "materialName": "Pent",
+            "quantity": 20,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 40,
+                "receivedDate": "2025-11-14",
+                "quantity": 20
+              }
+            ]
+          },
+          {
+            "id": 41,
+            "materialName": "Shirt",
+            "quantity": 5,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 41,
+                "receivedDate": "2025-11-14",
+                "quantity": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "submissionDate": "2025-11-12",
+        "totalQuantity": 35,
+        "totalEarning": 640,
+        "submittedItems": [
+          {
+            "id": 37,
+            "materialName": "Kurti",
+            "quantity": 29,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 37,
+                "receivedDate": "2025-11-12",
+                "quantity": 29
+              }
+            ]
+          },
+          {
+            "id": 38,
+            "materialName": "Pent",
+            "quantity": 6,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 38,
+                "receivedDate": "2025-11-12",
+                "quantity": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "submissionDate": "2025-11-08",
+        "totalQuantity": 16,
+        "totalEarning": 290,
+        "submittedItems": [
+          {
+            "id": 35,
+            "materialName": "Kurti",
+            "quantity": 13,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 35,
+                "receivedDate": "2025-11-08",
+                "quantity": 13
+              }
+            ]
+          },
+          {
+            "id": 36,
+            "materialName": "Pent",
+            "quantity": 3,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 36,
+                "receivedDate": "2025-11-08",
+                "quantity": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "submissionDate": "2025-11-07",
+        "totalQuantity": 11,
+        "totalEarning": 170,
+        "submittedItems": [
+          {
+            "id": 32,
+            "materialName": "Pent",
+            "quantity": 1,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 32,
+                "receivedDate": "2025-11-07",
+                "quantity": 1
+              }
+            ]
+          },
+          {
+            "id": 33,
+            "materialName": "Nana Shirt",
+            "quantity": 9,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 34,
+                "receivedDate": "2025-11-07",
+                "quantity": 9
+              }
+            ]
+          },
+          {
+            "id": 34,
+            "materialName": "Shirt",
+            "quantity": 1,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 33,
+                "receivedDate": "2025-11-07",
+                "quantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "submissionDate": "2025-11-05",
+        "totalQuantity": 25,
+        "totalEarning": 440,
+        "submittedItems": [
+          {
+            "id": 30,
+            "materialName": "Kurti",
+            "quantity": 19,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 30,
+                "receivedDate": "2025-11-05",
+                "quantity": 19
+              }
+            ]
+          },
+          {
+            "id": 31,
+            "materialName": "Pent",
+            "quantity": 6,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 31,
+                "receivedDate": "2025-11-05",
+                "quantity": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "submissionDate": "2025-11-04",
+        "totalQuantity": 34,
+        "totalEarning": 450,
+        "submittedItems": [
+          {
+            "id": 28,
+            "materialName": "Kurti",
+            "quantity": 11,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 28,
+                "receivedDate": "2025-11-04",
+                "quantity": 11
+              }
+            ]
+          },
+          {
+            "id": 29,
+            "materialName": "Pent",
+            "quantity": 23,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 29,
+                "receivedDate": "2025-11-04",
+                "quantity": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 32,
+        "submissionDate": "2025-11-02",
+        "totalQuantity": 85,
+        "totalEarning": 1330,
+        "submittedItems": [
+          {
+            "id": 61,
+            "materialName": "Kurti",
+            "quantity": 48,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 86,
+                "receivedDate": "2025-11-02",
+                "quantity": 48
+              }
+            ]
+          },
+          {
+            "id": 62,
+            "materialName": "Pent",
+            "quantity": 37,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 87,
+                "receivedDate": "2025-11-02",
+                "quantity": 37
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "submissionDate": "2025-10-18",
+        "totalQuantity": 40,
+        "totalEarning": 620,
+        "submittedItems": [
+          {
+            "id": 24,
+            "materialName": "Kurti",
+            "quantity": 22,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 24,
+                "receivedDate": "2025-10-18",
+                "quantity": 22
+              }
+            ]
+          },
+          {
+            "id": 25,
+            "materialName": "Pent",
+            "quantity": 18,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 25,
+                "receivedDate": "2025-10-18",
+                "quantity": 18
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "submissionDate": "2025-10-17",
+        "totalQuantity": 20,
+        "totalEarning": 400,
+        "submittedItems": [
+          {
+            "id": 23,
+            "materialName": "Kurti",
+            "quantity": 20,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 23,
+                "receivedDate": "2025-10-17",
+                "quantity": 20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "submissionDate": "2025-10-16",
+        "totalQuantity": 33,
+        "totalEarning": 390,
+        "submittedItems": [
+          {
+            "id": 21,
+            "materialName": "Kurti",
+            "quantity": 6,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 21,
+                "receivedDate": "2025-10-16",
+                "quantity": 6
+              }
+            ]
+          },
+          {
+            "id": 22,
+            "materialName": "Pent",
+            "quantity": 27,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 22,
+                "receivedDate": "2025-10-16",
+                "quantity": 27
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "submissionDate": "2025-10-15",
+        "totalQuantity": 25,
+        "totalEarning": 400,
+        "submittedItems": [
+          {
+            "id": 19,
+            "materialName": "Kurti",
+            "quantity": 15,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 19,
+                "receivedDate": "2025-10-15",
+                "quantity": 15
+              }
+            ]
+          },
+          {
+            "id": 20,
+            "materialName": "Pent",
+            "quantity": 10,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 20,
+                "receivedDate": "2025-10-15",
+                "quantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "submissionDate": "2025-10-14",
+        "totalQuantity": 15,
+        "totalEarning": 230,
+        "submittedItems": [
+          {
+            "id": 17,
+            "materialName": "Kurti",
+            "quantity": 8,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 17,
+                "receivedDate": "2025-10-14",
+                "quantity": 8
+              }
+            ]
+          },
+          {
+            "id": 18,
+            "materialName": "Pent",
+            "quantity": 7,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 18,
+                "receivedDate": "2025-10-14",
+                "quantity": 7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "submissionDate": "2025-10-11",
+        "totalQuantity": 39,
+        "totalEarning": 640,
+        "submittedItems": [
+          {
+            "id": 15,
+            "materialName": "Kurti",
+            "quantity": 25,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 15,
+                "receivedDate": "2025-10-11",
+                "quantity": 25
+              }
+            ]
+          },
+          {
+            "id": 16,
+            "materialName": "Pent",
+            "quantity": 14,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 16,
+                "receivedDate": "2025-10-11",
+                "quantity": 14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "submissionDate": "2025-10-08",
+        "totalQuantity": 45,
+        "totalEarning": 670,
+        "submittedItems": [
+          {
+            "id": 13,
+            "materialName": "Kurti",
+            "quantity": 22,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 13,
+                "receivedDate": "2025-10-08",
+                "quantity": 22
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "materialName": "Pent",
+            "quantity": 23,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 14,
+                "receivedDate": "2025-10-08",
+                "quantity": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "submissionDate": "2025-10-06",
+        "totalQuantity": 45,
+        "totalEarning": 670,
+        "submittedItems": [
+          {
+            "id": 11,
+            "materialName": "Kurti",
+            "quantity": 22,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 11,
+                "receivedDate": "2025-10-06",
+                "quantity": 22
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "materialName": "Pent",
+            "quantity": 23,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 12,
+                "receivedDate": "2025-10-06",
+                "quantity": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "submissionDate": "2025-10-05",
+        "totalQuantity": 41,
+        "totalEarning": 630,
+        "submittedItems": [
+          {
+            "id": 9,
+            "materialName": "Kurti",
+            "quantity": 22,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 9,
+                "receivedDate": "2025-10-05",
+                "quantity": 22
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "materialName": "Pent",
+            "quantity": 19,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 10,
+                "receivedDate": "2025-10-05",
+                "quantity": 19
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "submissionDate": "2025-10-04",
+        "totalQuantity": 8,
+        "totalEarning": 130,
+        "submittedItems": [
+          {
+            "id": 7,
+            "materialName": "Kurti",
+            "quantity": 5,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 7,
+                "receivedDate": "2025-10-04",
+                "quantity": 5
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "materialName": "Pent",
+            "quantity": 3,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 8,
+                "receivedDate": "2025-10-04",
+                "quantity": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "submissionDate": "2025-10-03",
+        "totalQuantity": 33,
+        "totalEarning": 450,
+        "submittedItems": [
+          {
+            "id": 5,
+            "materialName": "Kurti",
+            "quantity": 12,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 5,
+                "receivedDate": "2025-10-03",
+                "quantity": 12
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "materialName": "Pent",
+            "quantity": 21,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 6,
+                "receivedDate": "2025-10-03",
+                "quantity": 21
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "submissionDate": "2025-10-02",
+        "totalQuantity": 33,
+        "totalEarning": 590,
+        "submittedItems": [
+          {
+            "id": 3,
+            "materialName": "Kurti",
+            "quantity": 26,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 3,
+                "receivedDate": "2025-10-02",
+                "quantity": 26
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "materialName": "Pent",
+            "quantity": 7,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 4,
+                "receivedDate": "2025-10-02",
+                "quantity": 7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "submissionDate": "2025-10-01",
+        "totalQuantity": 41,
+        "totalEarning": 620,
+        "submittedItems": [
+          {
+            "id": 1,
+            "materialName": "Kurti",
+            "quantity": 21,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 1,
+                "receivedDate": "2025-10-01",
+                "quantity": 21
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "materialName": "Pent",
+            "quantity": 20,
+            "totalEarning": null,
+            "submitId": null,
+            "details": [
+              {
+                "receivedItemId": 2,
+                "receivedDate": "2025-10-01",
+                "quantity": 20
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "page": 0,
+    "size": 60,
+    "totalElements": 29,
+    "totalPages": 1
+  },
+  "status": 200,
+  "timestamp": "2025-12-25 09:17:49"
+}

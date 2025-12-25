@@ -65,9 +65,8 @@ public class SewEarnReceiveServiceImpl implements SewEarnReceiveService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<SewEarnReceiveResponse> getAllReceives(Pageable pageable) {
-        return receiveRepository.findAll(pageable)
-                .map(mapper::toDto);
+    public Page<SewEarnReceive> getAllReceives(Pageable pageable) {
+        return receiveRepository.findAll(pageable);
     }
 
     @Override

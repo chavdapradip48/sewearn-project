@@ -8,6 +8,7 @@ import com.pradip.sewearn.dto.submit.AwaitingSubmissionMaterialResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitRequest;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitSummaryResponse;
+import com.pradip.sewearn.model.submit.SewEarnSubmit;
 import com.pradip.sewearn.service.SewEarnSubmitService;
 import com.pradip.sewearn.util.PagingUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,7 +52,8 @@ public class SewEarnSubmitController {
     // PAGED LIST
     @Operation(summary = "Get all submissions (paged)")
     @GetMapping
-    public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmitSummaryResponse>>> listAll(
+    public ResponseEntity<ApiResponse<PagedResponse<SewEarnSubmit
+            >>> listAll(
         @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
         @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
         @RequestParam(defaultValue = RestDefaultConstant.SORT_SUBMIT_DATE_DEFAULT) String sort,
@@ -64,14 +66,14 @@ public class SewEarnSubmitController {
                 Sort.by(Sort.Direction.fromString(dir), sort)
         );
 
-        Page<SewEarnSubmitSummaryResponse> result = service.getAllSubmissionsSummaryPaged(pageable);
+        Page<SewEarnSubmit> allSubmissions = service.getAllSubmissions(pageable);
 
-        PagedResponse<SewEarnSubmitSummaryResponse> paged = PagedResponse.<SewEarnSubmitSummaryResponse>builder()
-                .items(result.getContent())
-                .page(result.getNumber())
-                .size(result.getSize())
-                .totalElements(result.getTotalElements())
-                .totalPages(result.getTotalPages())
+        PagedResponse<SewEarnSubmit> paged = PagedResponse.<SewEarnSubmit>builder()
+                .items(allSubmissions.getContent())
+                .page(allSubmissions.getNumber())
+                .size(allSubmissions.getSize())
+                .totalElements(allSubmissions.getTotalElements())
+                .totalPages(allSubmissions.getTotalPages())
                 .build();
 
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.SUBMIT_LIST_FETCHED, paged));

@@ -1,5 +1,7 @@
 package com.pradip.sewearn.model.submit;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pradip.sewearn.model.BaseEntity;
 import com.pradip.sewearn.model.RawMaterialType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,11 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SubmitItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SubmitItem extends BaseEntity {
 
     private Integer quantity;
 
@@ -30,6 +28,7 @@ public class SubmitItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "submit_id")
+    @JsonIgnore
     private SewEarnSubmit submit;
 
     @OneToMany(mappedBy = "submitItem", cascade = CascadeType.ALL, orphanRemoval = true)

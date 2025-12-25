@@ -1,5 +1,7 @@
 package com.pradip.sewearn.model.receive;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pradip.sewearn.model.BaseEntity;
 import com.pradip.sewearn.model.RawMaterialType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,11 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReceivedItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ReceivedItem extends BaseEntity {
 
     private Integer quantity;               // received quantity
     private Integer totalCompletedQuantity; // accumulated from item tracks
@@ -29,6 +27,7 @@ public class ReceivedItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receive_id")
+    @JsonIgnore
     private SewEarnReceive receive;
 
     @OneToMany(mappedBy = "receivedItem", cascade = CascadeType.ALL, orphanRemoval = true)

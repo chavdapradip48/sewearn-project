@@ -3,6 +3,7 @@ package com.pradip.sewearn.service;
 import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.receive.*;
 
+import com.pradip.sewearn.model.receive.SewEarnReceive;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,7 +16,7 @@ public interface SewEarnReceiveService {
 
     SewEarnReceiveResponse getReceiveById(Long id);
 
-    Page<SewEarnReceiveResponse> getAllReceives(Pageable pageable);
+    Page<SewEarnReceive> getAllReceives(Pageable pageable);
 
     Page<SewEarnReceiveResponse> getReceivesByDate(LocalDate date, Pageable pageable);
 

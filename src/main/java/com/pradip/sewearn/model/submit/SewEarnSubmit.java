@@ -1,5 +1,6 @@
 package com.pradip.sewearn.model.submit;
 
+import com.pradip.sewearn.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,11 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SewEarnSubmit {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SewEarnSubmit extends BaseEntity {
 
     private LocalDate submissionDate;
 

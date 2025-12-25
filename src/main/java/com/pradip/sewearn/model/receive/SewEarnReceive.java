@@ -1,5 +1,6 @@
 package com.pradip.sewearn.model.receive;
 
+import com.pradip.sewearn.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,11 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SewEarnReceive {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SewEarnReceive extends BaseEntity {
 
     private LocalDate receivedDate;
 
