@@ -4,10 +4,10 @@ set -euo pipefail
 # =========================
 # CONFIG
 # =========================
-NEON_HOST="ep-withered-resonance-admj00qg-pooler.c-2.us-east-1.aws.neon.tech"
-NEON_PORT="5432"
-NEON_USER="neondb_owner"
-PGPASSWORD="npg_bC9ZdFyvrGz8"              # Neon password
+NEON_HOST="**************"
+NEON_PORT="**************"
+NEON_USER="**************"
+PGPASSWORD="*************"              # Neon password
 NEON_DB="sewearn"
 SSL_MODE="require"
 
