@@ -1,0 +1,1412 @@
+{
+  "message": "Receive batches retrieved successfully",
+  "data": {
+    "items": [
+      {
+        "id": 62,
+        "receivedDate": "2025-12-23",
+        "totalReceivedQuantity": 29,
+        "totalEarning": 350,
+        "markAsCompleted": false,
+        "receivedItems": [
+          {
+            "id": 100,
+            "quantity": 15,
+            "totalCompletedQuantity": 0,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": []
+          },
+          {
+            "id": 101,
+            "quantity": 14,
+            "totalCompletedQuantity": 14,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 136,
+                "completedDate": "2025-12-24",
+                "completedQuantity": 14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 63,
+        "receivedDate": "2025-12-17",
+        "totalReceivedQuantity": 56,
+        "totalEarning": 1130,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 102,
+            "quantity": 54,
+            "totalCompletedQuantity": 54,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 121,
+                "completedDate": "2025-12-16",
+                "completedQuantity": 16
+              },
+              {
+                "id": 122,
+                "completedDate": "2025-12-19",
+                "completedQuantity": 25
+              },
+              {
+                "id": 123,
+                "completedDate": "2025-12-22",
+                "completedQuantity": 10
+              },
+              {
+                "id": 124,
+                "completedDate": "2025-12-23",
+                "completedQuantity": 3
+              }
+            ]
+          },
+          {
+            "id": 103,
+            "quantity": 2,
+            "totalCompletedQuantity": 2,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 125,
+                "completedDate": "2025-12-23",
+                "completedQuantity": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 32,
+        "receivedDate": "2025-12-15",
+        "totalReceivedQuantity": 16,
+        "totalEarning": 365,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 61,
+            "quantity": 7,
+            "totalCompletedQuantity": 7,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 82,
+                "completedDate": "2025-12-16",
+                "completedQuantity": 7
+              }
+            ]
+          },
+          {
+            "id": 62,
+            "quantity": 9,
+            "totalCompletedQuantity": 9,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 83,
+                "completedDate": "2025-12-16",
+                "completedQuantity": 5
+              },
+              {
+                "id": 88,
+                "completedDate": "2025-12-17",
+                "completedQuantity": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "receivedDate": "2025-12-12",
+        "totalReceivedQuantity": 38,
+        "totalEarning": 785,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 60,
+            "quantity": 1,
+            "totalCompletedQuantity": 1,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 61,
+                "completedDate": "2025-12-14",
+                "completedQuantity": 1
+              }
+            ]
+          },
+          {
+            "id": 56,
+            "quantity": 30,
+            "totalCompletedQuantity": 30,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 60,
+                "completedDate": "2025-12-13",
+                "completedQuantity": 6
+              },
+              {
+                "id": 62,
+                "completedDate": "2025-12-14",
+                "completedQuantity": 17
+              },
+              {
+                "id": 63,
+                "completedDate": "2025-12-15",
+                "completedQuantity": 7
+              }
+            ]
+          },
+          {
+            "id": 57,
+            "quantity": 7,
+            "totalCompletedQuantity": 7,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 64,
+                "completedDate": "2025-12-15",
+                "completedQuantity": 4
+              },
+              {
+                "id": 72,
+                "completedDate": "2025-12-16",
+                "completedQuantity": 2
+              },
+              {
+                "id": 87,
+                "completedDate": "2025-12-17",
+                "completedQuantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 28,
+        "receivedDate": "2025-12-07",
+        "totalReceivedQuantity": 46,
+        "totalEarning": 920,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 55,
+            "quantity": 46,
+            "totalCompletedQuantity": 46,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 56,
+                "completedDate": "2025-12-08",
+                "completedQuantity": 16
+              },
+              {
+                "id": 57,
+                "completedDate": "2025-12-09",
+                "completedQuantity": 16
+              },
+              {
+                "id": 58,
+                "completedDate": "2025-12-10",
+                "completedQuantity": 14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "receivedDate": "2025-12-03",
+        "totalReceivedQuantity": 10,
+        "totalEarning": 250,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 49,
+            "quantity": 10,
+            "totalCompletedQuantity": 10,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 49,
+                "completedDate": "2025-12-03",
+                "completedQuantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "receivedDate": "2025-12-03",
+        "totalReceivedQuantity": 40,
+        "totalEarning": 695,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 51,
+            "quantity": 16,
+            "totalCompletedQuantity": 16,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 52,
+                "completedDate": "2025-12-04",
+                "completedQuantity": 6
+              },
+              {
+                "id": 59,
+                "completedDate": "2025-12-11",
+                "completedQuantity": 10
+              }
+            ]
+          },
+          {
+            "id": 54,
+            "quantity": 6,
+            "totalCompletedQuantity": 6,
+            "rawMaterialType": {
+              "id": 3,
+              "name": "Nana Shirt",
+              "price": 15
+            },
+            "itemTracks": [
+              {
+                "id": 53,
+                "completedDate": "2025-12-04",
+                "completedQuantity": 6
+              }
+            ]
+          },
+          {
+            "id": 53,
+            "quantity": 7,
+            "totalCompletedQuantity": 7,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 54,
+                "completedDate": "2025-12-04",
+                "completedQuantity": 7
+              }
+            ]
+          },
+          {
+            "id": 52,
+            "quantity": 11,
+            "totalCompletedQuantity": 11,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 55,
+                "completedDate": "2025-12-04",
+                "completedQuantity": 11
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "receivedDate": "2025-11-27",
+        "totalReceivedQuantity": 40,
+        "totalEarning": 1000,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 48,
+            "quantity": 40,
+            "totalCompletedQuantity": 40,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 48,
+                "completedDate": "2025-11-27",
+                "completedQuantity": 40
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "receivedDate": "2025-11-24",
+        "totalReceivedQuantity": 11,
+        "totalEarning": 220,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 47,
+            "quantity": 11,
+            "totalCompletedQuantity": 11,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 47,
+                "completedDate": "2025-11-24",
+                "completedQuantity": 11
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "receivedDate": "2025-11-16",
+        "totalReceivedQuantity": 26,
+        "totalEarning": 355,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 44,
+            "quantity": 8,
+            "totalCompletedQuantity": 8,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 44,
+                "completedDate": "2025-11-16",
+                "completedQuantity": 8
+              }
+            ]
+          },
+          {
+            "id": 45,
+            "quantity": 17,
+            "totalCompletedQuantity": 17,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 45,
+                "completedDate": "2025-11-16",
+                "completedQuantity": 17
+              }
+            ]
+          },
+          {
+            "id": 46,
+            "quantity": 1,
+            "totalCompletedQuantity": 1,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 46,
+                "completedDate": "2025-11-16",
+                "completedQuantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "receivedDate": "2025-11-15",
+        "totalReceivedQuantity": 15,
+        "totalEarning": 200,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 42,
+            "quantity": 5,
+            "totalCompletedQuantity": 5,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 42,
+                "completedDate": "2025-11-15",
+                "completedQuantity": 5
+              }
+            ]
+          },
+          {
+            "id": 43,
+            "quantity": 10,
+            "totalCompletedQuantity": 10,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 43,
+                "completedDate": "2025-11-15",
+                "completedQuantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "receivedDate": "2025-11-14",
+        "totalReceivedQuantity": 50,
+        "totalEarning": 825,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 39,
+            "quantity": 25,
+            "totalCompletedQuantity": 25,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 39,
+                "completedDate": "2025-11-14",
+                "completedQuantity": 25
+              }
+            ]
+          },
+          {
+            "id": 40,
+            "quantity": 20,
+            "totalCompletedQuantity": 20,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 40,
+                "completedDate": "2025-11-14",
+                "completedQuantity": 20
+              }
+            ]
+          },
+          {
+            "id": 41,
+            "quantity": 5,
+            "totalCompletedQuantity": 5,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 41,
+                "completedDate": "2025-11-14",
+                "completedQuantity": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "receivedDate": "2025-11-12",
+        "totalReceivedQuantity": 35,
+        "totalEarning": 640,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 37,
+            "quantity": 29,
+            "totalCompletedQuantity": 29,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 37,
+                "completedDate": "2025-11-12",
+                "completedQuantity": 29
+              }
+            ]
+          },
+          {
+            "id": 38,
+            "quantity": 6,
+            "totalCompletedQuantity": 6,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 38,
+                "completedDate": "2025-11-12",
+                "completedQuantity": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "receivedDate": "2025-11-08",
+        "totalReceivedQuantity": 16,
+        "totalEarning": 290,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 35,
+            "quantity": 13,
+            "totalCompletedQuantity": 13,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 35,
+                "completedDate": "2025-11-08",
+                "completedQuantity": 13
+              }
+            ]
+          },
+          {
+            "id": 36,
+            "quantity": 3,
+            "totalCompletedQuantity": 3,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 36,
+                "completedDate": "2025-11-08",
+                "completedQuantity": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "receivedDate": "2025-11-07",
+        "totalReceivedQuantity": 11,
+        "totalEarning": 170,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 32,
+            "quantity": 1,
+            "totalCompletedQuantity": 1,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 32,
+                "completedDate": "2025-11-07",
+                "completedQuantity": 1
+              }
+            ]
+          },
+          {
+            "id": 33,
+            "quantity": 1,
+            "totalCompletedQuantity": 1,
+            "rawMaterialType": {
+              "id": 4,
+              "name": "Shirt",
+              "price": 25
+            },
+            "itemTracks": [
+              {
+                "id": 33,
+                "completedDate": "2025-11-07",
+                "completedQuantity": 1
+              }
+            ]
+          },
+          {
+            "id": 34,
+            "quantity": 9,
+            "totalCompletedQuantity": 9,
+            "rawMaterialType": {
+              "id": 3,
+              "name": "Nana Shirt",
+              "price": 15
+            },
+            "itemTracks": [
+              {
+                "id": 34,
+                "completedDate": "2025-11-07",
+                "completedQuantity": 9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "receivedDate": "2025-11-05",
+        "totalReceivedQuantity": 25,
+        "totalEarning": 440,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 30,
+            "quantity": 19,
+            "totalCompletedQuantity": 19,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 30,
+                "completedDate": "2025-11-05",
+                "completedQuantity": 19
+              }
+            ]
+          },
+          {
+            "id": 31,
+            "quantity": 6,
+            "totalCompletedQuantity": 6,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 31,
+                "completedDate": "2025-11-05",
+                "completedQuantity": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "receivedDate": "2025-11-04",
+        "totalReceivedQuantity": 34,
+        "totalEarning": 450,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 28,
+            "quantity": 11,
+            "totalCompletedQuantity": 11,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 28,
+                "completedDate": "2025-11-04",
+                "completedQuantity": 11
+              }
+            ]
+          },
+          {
+            "id": 29,
+            "quantity": 23,
+            "totalCompletedQuantity": 23,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 29,
+                "completedDate": "2025-11-04",
+                "completedQuantity": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 50,
+        "receivedDate": "2025-11-02",
+        "totalReceivedQuantity": 85,
+        "totalEarning": 1330,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 86,
+            "quantity": 48,
+            "totalCompletedQuantity": 48,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 90,
+                "completedDate": "2025-11-02",
+                "completedQuantity": 48
+              }
+            ]
+          },
+          {
+            "id": 87,
+            "quantity": 37,
+            "totalCompletedQuantity": 37,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 91,
+                "completedDate": "2025-11-02",
+                "completedQuantity": 37
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "receivedDate": "2025-10-18",
+        "totalReceivedQuantity": 40,
+        "totalEarning": 620,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 24,
+            "quantity": 22,
+            "totalCompletedQuantity": 22,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 24,
+                "completedDate": "2025-10-18",
+                "completedQuantity": 22
+              }
+            ]
+          },
+          {
+            "id": 25,
+            "quantity": 18,
+            "totalCompletedQuantity": 18,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 25,
+                "completedDate": "2025-10-18",
+                "completedQuantity": 18
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "receivedDate": "2025-10-17",
+        "totalReceivedQuantity": 20,
+        "totalEarning": 400,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 23,
+            "quantity": 20,
+            "totalCompletedQuantity": 20,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 23,
+                "completedDate": "2025-10-17",
+                "completedQuantity": 20
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "receivedDate": "2025-10-16",
+        "totalReceivedQuantity": 33,
+        "totalEarning": 390,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 21,
+            "quantity": 6,
+            "totalCompletedQuantity": 6,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 21,
+                "completedDate": "2025-10-16",
+                "completedQuantity": 6
+              }
+            ]
+          },
+          {
+            "id": 22,
+            "quantity": 27,
+            "totalCompletedQuantity": 27,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 22,
+                "completedDate": "2025-10-16",
+                "completedQuantity": 27
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "receivedDate": "2025-10-15",
+        "totalReceivedQuantity": 25,
+        "totalEarning": 400,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 19,
+            "quantity": 15,
+            "totalCompletedQuantity": 15,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 19,
+                "completedDate": "2025-10-15",
+                "completedQuantity": 15
+              }
+            ]
+          },
+          {
+            "id": 20,
+            "quantity": 10,
+            "totalCompletedQuantity": 10,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 20,
+                "completedDate": "2025-10-15",
+                "completedQuantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "receivedDate": "2025-10-14",
+        "totalReceivedQuantity": 15,
+        "totalEarning": 230,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 17,
+            "quantity": 8,
+            "totalCompletedQuantity": 8,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 17,
+                "completedDate": "2025-10-14",
+                "completedQuantity": 8
+              }
+            ]
+          },
+          {
+            "id": 18,
+            "quantity": 7,
+            "totalCompletedQuantity": 7,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 18,
+                "completedDate": "2025-10-14",
+                "completedQuantity": 7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "receivedDate": "2025-10-11",
+        "totalReceivedQuantity": 39,
+        "totalEarning": 640,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 15,
+            "quantity": 25,
+            "totalCompletedQuantity": 25,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 15,
+                "completedDate": "2025-10-11",
+                "completedQuantity": 25
+              }
+            ]
+          },
+          {
+            "id": 16,
+            "quantity": 14,
+            "totalCompletedQuantity": 14,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 16,
+                "completedDate": "2025-10-11",
+                "completedQuantity": 14
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "receivedDate": "2025-10-08",
+        "totalReceivedQuantity": 45,
+        "totalEarning": 670,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 13,
+            "quantity": 22,
+            "totalCompletedQuantity": 22,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 13,
+                "completedDate": "2025-10-08",
+                "completedQuantity": 22
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "quantity": 23,
+            "totalCompletedQuantity": 23,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 14,
+                "completedDate": "2025-10-08",
+                "completedQuantity": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "receivedDate": "2025-10-06",
+        "totalReceivedQuantity": 45,
+        "totalEarning": 670,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 11,
+            "quantity": 22,
+            "totalCompletedQuantity": 22,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 11,
+                "completedDate": "2025-10-06",
+                "completedQuantity": 22
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "quantity": 23,
+            "totalCompletedQuantity": 23,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 12,
+                "completedDate": "2025-10-06",
+                "completedQuantity": 23
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "receivedDate": "2025-10-05",
+        "totalReceivedQuantity": 41,
+        "totalEarning": 630,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 9,
+            "quantity": 22,
+            "totalCompletedQuantity": 22,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 9,
+                "completedDate": "2025-10-05",
+                "completedQuantity": 22
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "quantity": 19,
+            "totalCompletedQuantity": 19,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 10,
+                "completedDate": "2025-10-05",
+                "completedQuantity": 19
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "receivedDate": "2025-10-04",
+        "totalReceivedQuantity": 8,
+        "totalEarning": 130,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 7,
+            "quantity": 5,
+            "totalCompletedQuantity": 5,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 7,
+                "completedDate": "2025-10-04",
+                "completedQuantity": 5
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "quantity": 3,
+            "totalCompletedQuantity": 3,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 8,
+                "completedDate": "2025-10-04",
+                "completedQuantity": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "receivedDate": "2025-10-03",
+        "totalReceivedQuantity": 33,
+        "totalEarning": 450,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 5,
+            "quantity": 12,
+            "totalCompletedQuantity": 12,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 5,
+                "completedDate": "2025-10-03",
+                "completedQuantity": 12
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "quantity": 21,
+            "totalCompletedQuantity": 21,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 6,
+                "completedDate": "2025-10-03",
+                "completedQuantity": 21
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "receivedDate": "2025-10-02",
+        "totalReceivedQuantity": 33,
+        "totalEarning": 590,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 3,
+            "quantity": 26,
+            "totalCompletedQuantity": 26,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 3,
+                "completedDate": "2025-10-02",
+                "completedQuantity": 26
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "quantity": 7,
+            "totalCompletedQuantity": 7,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 4,
+                "completedDate": "2025-10-02",
+                "completedQuantity": 7
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "receivedDate": "2025-10-01",
+        "totalReceivedQuantity": 41,
+        "totalEarning": 620,
+        "markAsCompleted": true,
+        "receivedItems": [
+          {
+            "id": 1,
+            "quantity": 21,
+            "totalCompletedQuantity": 21,
+            "rawMaterialType": {
+              "id": 1,
+              "name": "Kurti",
+              "price": 20
+            },
+            "itemTracks": [
+              {
+                "id": 1,
+                "completedDate": "2025-10-01",
+                "completedQuantity": 21
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "quantity": 20,
+            "totalCompletedQuantity": 20,
+            "rawMaterialType": {
+              "id": 2,
+              "name": "Pent",
+              "price": 10
+            },
+            "itemTracks": [
+              {
+                "id": 2,
+                "completedDate": "2025-10-01",
+                "completedQuantity": 20
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "page": 0,
+    "size": 60,
+    "totalElements": 31,
+    "totalPages": 1
+  },
+  "status": 200,
+  "timestamp": "2025-12-25 09:45:30"
+}

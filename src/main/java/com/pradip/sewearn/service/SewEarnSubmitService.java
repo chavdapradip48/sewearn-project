@@ -4,6 +4,7 @@ import com.pradip.sewearn.dto.submit.AwaitingSubmissionMaterialResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitRequest;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitResponse;
 import com.pradip.sewearn.dto.submit.SewEarnSubmitSummaryResponse;
+import com.pradip.sewearn.model.submit.SewEarnSubmit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,7 +17,7 @@ public interface SewEarnSubmitService {
 
     SewEarnSubmitResponse getSubmissionById(Long id);
 
-    Page<SewEarnSubmitResponse> getAllSubmissions(Pageable pageable);
+    Page<SewEarnSubmit> getAllSubmissions(Pageable pageable);
 
     Page<SewEarnSubmitResponse> getSubmissionsByDate(LocalDate date, Pageable pageable);
 

@@ -1,5 +1,7 @@
 package com.pradip.sewearn.model.submit;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pradip.sewearn.model.BaseEntity;
 import com.pradip.sewearn.model.receive.ReceivedItem;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,21 +15,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SubmitItemDetail {
+public class SubmitItemDetail extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // Quantity taken from this received batch
     @Column(nullable = false)
     private Integer quantity;
 
-    // For reporting, quick access
     private LocalDate receivedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "submit_item_id", nullable = false)
+    @JsonIgnore
     private SubmitItem submitItem;
 
     @ManyToOne(fetch = FetchType.LAZY)

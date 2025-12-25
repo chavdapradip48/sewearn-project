@@ -1,5 +1,7 @@
 package com.pradip.sewearn.model.receive;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pradip.sewearn.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,11 +14,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ItemTrack {
+public class ItemTrack extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private LocalDate completedDate;
 
@@ -24,5 +23,6 @@ public class ItemTrack {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "received_item_id")
+    @JsonIgnore
     private ReceivedItem receivedItem;
 }

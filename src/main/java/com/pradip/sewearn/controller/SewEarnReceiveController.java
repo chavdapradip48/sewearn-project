@@ -6,6 +6,7 @@ import com.pradip.sewearn.dto.ApiResponse;
 import com.pradip.sewearn.dto.MarkAsCompletedRequest;
 import com.pradip.sewearn.dto.PagedResponse;
 import com.pradip.sewearn.dto.receive.*;
+import com.pradip.sewearn.model.receive.SewEarnReceive;
 import com.pradip.sewearn.service.SewEarnReceiveService;
 import com.pradip.sewearn.util.PagingUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,13 +51,13 @@ public class SewEarnReceiveController {
     // PAGED LIST
     @Operation(summary = "Get all receives (paged)")
     @GetMapping
-    public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceiveResponse>>> listAll(
+    public ResponseEntity<ApiResponse<PagedResponse<SewEarnReceive>>> listAll(
             @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_DEFAULT) int page,
             @RequestParam(defaultValue = RestDefaultConstant.PAGINATION_SIZE_DEFAULT) int size,
             @RequestParam(defaultValue = RestDefaultConstant.SORT_RECEIVED_DATE_DEFAULT) String sort,
             @RequestParam(defaultValue = RestDefaultConstant.DIRECTION_DEFAULT) String dir) {
 
-        Page<SewEarnReceiveResponse> result = service.getAllReceives(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
+        Page<SewEarnReceive> result = service.getAllReceives(PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(dir), sort)));
         return ResponseEntity.ok(ApiResponse.success(ApiMessages.RECEIVE_LIST_FETCHED, PagingUtils.toPagedResponse(result)));
     }
 

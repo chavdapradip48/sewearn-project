@@ -63,8 +63,8 @@ public class SewEarnSubmitServiceImpl implements SewEarnSubmitService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<SewEarnSubmitResponse> getAllSubmissions(Pageable pageable) {
-        return submitRepository.findAll(pageable).map(mapper::toDto);
+    public Page<SewEarnSubmit> getAllSubmissions(Pageable pageable) {
+        return submitRepository.findAll(pageable);
     }
 
     @Override
